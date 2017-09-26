@@ -43,5 +43,5 @@ while 1:
         print('Exactly!')
     else:
         print('Not so good!')
-    print('\n' * 18)
+    print('\n' * 19)
 
