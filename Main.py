@@ -4,6 +4,7 @@ __author__ = 'Yee_172'
 __data__ = '2017/9/26'
 
 
+import os
 import numpy as np
 import pandas as pd
 
@@ -27,6 +28,7 @@ def find_word_index(word):
 
 
 while 1:
+    print()
     word = input('Your word: ')
     if word in ['q', 'quit', 'exit']:
         break
@@ -37,8 +39,9 @@ while 1:
     print()
     print('Your definition: %s' % definition)
     print('Real definition: %s' % alphabet[index, 2])
-    if alphabet[index, 2] == definition:
+    if alphabet[index, 2].lower() == definition.lower():
         print('Exactly!')
     else:
         print('Not so good!')
-    
+    print('\n' * 18)
+
