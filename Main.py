@@ -37,5 +37,7 @@ while 1:
         print('Exactly!')
     else:
         print('Not so good!')
-    print('\n' * 19)
+    print()
+    print('Sample sentence: %s' % alphabet[index, 3])
+    print('\n' * 17)
 
