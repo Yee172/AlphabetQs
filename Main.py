@@ -9,12 +9,6 @@ import numpy as np
 import pandas as pd
 
 
-# def get_each_value(array, i):
-#     string = str(array.ix[i].values).replace('[', '').replace(']', '')
-#     string = string.replace('\'', '', 3).replace('\'', '', -1).split(' ', 2)
-#     return string
-
-
 PATH = './Lib/Alphabet.csv'
 alphabet = pd.read_csv(PATH).values
 LENGTH = len(alphabet)
