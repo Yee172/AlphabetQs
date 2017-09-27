@@ -1,32 +1,43 @@
-#,WORD,DEFINITION
-1,Abundant,Present in large quantities
-2,Accumulate,To gradually collect
-3,Accurate,Correct; free from errors
-4,Accustomed,Used to something
-5,Acquire,To come into possession of
-6,Adamant,Refusing to change an opinion
-7,Adequate,Enough to suit your needs
-8,Adjacent,Close to or next to
-9,Adjust,To change something so it serves its purpose better
-10,Advantage,Something that makes it easier to achieve success
-11,Advocate,To publicly support
-12,Adverse,Unfavorable; against one's desires
-13,Aggregate,To combine
-14,Aggressive,Assertive and pushy
-15,Allocate,To put aside for a specific purpose
-16,Alternative,Another option or choice
-17,Amateur,Someone who is inexperienced or not highly skilled in a particular area
-18,Ambiguous,Having several potential meanings; unclear and difficult to understand
-19,Ambitious,Having large goals
-20,Amend,To change for the better; to improve
-21,Ample,Plentiful
-22,Anomaly,Deviation from the norm
-23,Annual,Occurring yearly
-24,Antagonize,To tease or be hostile towards a person or group
-25,Attitude,Manner or feeling
-26,Attribute,To give credit
-27,Arbitrary,Based on a whim or random decision
-28,Arduous,Requiring a lot of effort
-29,Assuage,To lessen a negative feeling
-30,Assume,To suppose without solid proof
-31,Augment,To increase or make larger
+#,WORD,DEFINITION,SAMPLE SENTENCE
+1,Abundant,"Present in large quantities","Living close to a lake means we have an ``abundant` supply of water."
+2,Accumulate,"To gradually collect","Each fall, leaves ``accumulate` in our yard."
+3,Accurate,"Correct; free from errors","Make sure your address is ``accurate` before submitting your online order."
+4,Accustomed,"Used to something","Having 8AM classes means I'm ``accustomed` to getting up early."
+5,Acquire,"To come into possession of","When my grandmother died, I ``acquired` her cookbook collection."
+6,Adamant,"Refusing to change an opinion","The defendant was ``adamant` that he was innocent."
+7,Adequate,"Enough to suit your needs","Our house isn't big, but it's ``adequate` for the two of us."
+8,Adjacent,"Close to or next to","The park is ``adjacent` to the school."
+9,Adjust,"To change something so it serves its purpose better","The bike seat may be two high; you'll probably need to ``adjust` it."
+10,Advantage,"Something that makes it easier to achieve success"
+11,Advocate,"To publicly support"
+12,Adverse,"Unfavorable; against one's desires"
+13,Aggregate,"To combine"
+14,Aggressive,"Assertive and pushy"
+15,Allocate,"To put aside for a specific purpose"
+16,Alternative,"Another option or choice"
+17,Amateur,"Someone who is inexperienced or not highly skilled in a particular area"
+18,Ambiguous,"Having several potential meanings; unclear and difficult to understand"
+19,Ambitious,"Having large goals"
+20,Amend,"To change for the better; to improve"
+21,Ample,"Plentiful"
+22,Anomaly,"Deviation from the norm"
+23,Annual,"Occurring yearly"
+24,Antagonize,"To tease or be hostile towards a person or group"
+25,Attitude,"Manner or feeling"
+26,Attribute,"To give credit"
+27,Arbitrary,"Based on a whim or random decision"
+28,Arduous,"Requiring a lot of effort"
+29,Assuage,"To lessen a negative feeling"
+30,Assume,"To suppose without solid proof"
+31,Augment,"To increase or make larger"
+32,Benefit,"Something positive or advantageous"
+33,Berate,"To scold"
+34,Bestow,"To give as a gift"
+35,Boast,"To brag or talk with excessive pride"
+36,Boost,"To help raise or increase something"
+37,Brash,"Rude and tactless"
+38,Brief,"Short(in terms of time)"
+39,Brusque,"Abrupt to the point of rudeness"
+40,Cacophony,"A harsh, unpleasant mixture of noise"
+41,Cease,"To stop"
+42,Censure,"To express strong disapproval"
