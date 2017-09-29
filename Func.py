@@ -5,7 +5,6 @@ __data__ = '2017/9/26'
 __all__ = ['read_in', 'find_word']
 
 
-import numpy as np
 import pandas as pd
 from Element import Word, Family, Alphabet
 
