@@ -4,40 +4,31 @@ __author__ = 'Yee_172'
 __data__ = '2017/9/26'
 
 
-import os
-import numpy as np
-import pandas as pd
-
-
-PATH = './Lib/Alphabet.csv'
-alphabet = pd.read_csv(PATH).values
-LENGTH = len(alphabet)
-
-
-def find_word_index(word):
-    for i in range(LENGTH):
-        if alphabet[i, 1].lower() == word.lower():
-            return i
-    return -1
+from Func import *
 
 
 while 1:
     print()
-    word = input('Your word: ')
-    if word in ['q', 'quit', 'exit']:
+    content = input('Your word or num: ')
+    if content in ['q', 'quit', 'exit']:
         break
-    index = find_word_index(word)
-    if index is -1:
+    try:
+        content = int(content)
+    except:
+        pass
+    word = find_word(content)
+    if word is None:
         continue
+    print('\nYour word:       %s' % word.word)
     definition = input('Your definition: ')
     print()
     print('Your definition: %s' % definition)
-    print('Real definition: %s' % alphabet[index, 2])
-    if alphabet[index, 2].lower() == definition.lower():
+    print('Real definition: %s' % word.definition)
+    if word.definition.lower() == definition.lower():
         print('Exactly!')
     else:
         print('Not so good!')
     print()
-    print('Sample sentence: %s' % alphabet[index, 3])
+    print('Sample sentence: %s' % word.get_sample())
     print('\n' * 17)
 

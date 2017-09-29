@@ -5,6 +5,9 @@ __data__ = '2017/9/27'
 __all__ = ['Word', 'Family', 'Alphabet']
 
 
+import random
+
+
 class Word:
     """
     A class of word
@@ -37,6 +40,7 @@ class Alphabet:
     """
     def __init__(self, words):
         self.total = Word.total
+        self.words = words
         self.familys = {'A': Family('A', words), 'B': Family('B', words),\
                         'C': Family('C', words), 'D': Family('D', words),\
                         'E': Family('E', words), 'F': Family('F', words),\
@@ -50,3 +54,13 @@ class Alphabet:
                         'U': Family('U', words), 'V': Family('V', words),\
                         'W': Family('W', words), 'X': Family('X', words),\
                         'Y': Family('Y', words), 'Z': Family('Z', words)}
+
+    def get_random(self, letter='all'):
+        if letter.lower() == 'all':
+            if len(self.words) > 1:
+                return self.words[random.randint(0, len(self.words) - 1)]
+        else:
+            words = self.familys[letter.upper()].words
+            if len(words) > 1:
+                return words[random.randint(0, len(words) - 1)]
+        return None
