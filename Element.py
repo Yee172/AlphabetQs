@@ -2,6 +2,7 @@
 # coding: utf-8
 __author__ = 'Yee_172'
 __data__ = '2017/9/27'
+__all__ = ['Word', 'Family', 'Alphabet']
 
 
 # import numpy as np
@@ -38,6 +39,7 @@ class Alphabet:
     A class of Alphabet
     """
     def __init__(self, words):
+
         self.familys = {'A': Family('A', words), 'B': Family('B', words), 'C': Family('C', words),\
                         'D': Family('D', words), 'E': Family('E', words), 'F': Family('F', words),\
                         'G': Family('G', words), 'H': Family('H', words), 'I': Family('I', words),\
