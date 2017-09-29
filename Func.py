@@ -21,4 +21,4 @@ alphabet = read_in(PATH)
 words = [Word(x) for x in alphabet]
 FamilyA = Family('A', words)
 alphabet = Alphabet(words)
-print(alphabet.familys['A'].words)
+print(alphabet.total)
