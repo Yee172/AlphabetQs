@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *  
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -60,9 +62,11 @@ class Ui_Dialog(object):
         self.label_console.setObjectName("label_console")
 
         self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(Dialog.accept)
-        self.buttonBox.rejected.connect(Dialog.reject)
+        # self.buttonBox.accepted.connect(Dialog.accept)
+        # self.buttonBox.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+        Dialog.show()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -76,3 +80,11 @@ class Ui_Dialog(object):
         self.label_samp_show.setText(_translate("Dialog", "TextLabel"))
         self.label_console.setText(_translate("Dialog", "CONSOLE"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+    widget = QWidget(None)
+    Ui_Dialog().setupUi(widget)
+    sys.exit(app.exec_())
+    pass
