@@ -192,6 +192,14 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <action name="actionread_in">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>read_in</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
