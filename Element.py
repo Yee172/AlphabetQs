@@ -57,11 +57,11 @@ class Alphabet:
                         'Y': Family('Y', words), 'Z': Family('Z', words)}
 
     def get_random(self, letter='all'):
-        if letter.lower() == 'all':
-            if len(self.words) > 1:
+        if letter.lower() in ['all', 'each', 'every']:
+            if len(self.words) > 0:
                 return self.words[random.randint(0, len(self.words) - 1)]
         else:
             words = self.familys[letter.upper()].words
-            if len(words) > 1:
+            if len(words) > 0:
                 return words[random.randint(0, len(words) - 1)]
         return None
