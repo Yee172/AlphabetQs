@@ -19,9 +19,8 @@ while 1:
         if content.lower() in ['r', 'rand', 'random']:
             clear_screen()
             print('You are in RANDOM mode now!')
-            global MODE
             MODE = 'RANDOM'
-            break
+            continue
         try:
             content = int(content)
         except:
@@ -39,12 +38,10 @@ while 1:
         if content.lower() in ['s', 'sear', 'search']:
             clear_screen()
             print('You are in SEARCH mode now!')
-            global MODE
             MODE = 'SEARCH'
-            break
+            continue
         try:
             word = random_word(content)
-            global RANDOM_LETTER
             RANDOM_LETTER = content
         except:
             word = random_word(RANDOM_LETTER)
