@@ -9,7 +9,7 @@ import os
 import pandas as pd
 from Element import Word, Family, Alphabet
 
-PATH = './Lib/Alphabet.csv'
+PATH = './Lib/E_alphabet.csv'
 
 
 def read_in(csvfile):
