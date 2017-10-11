@@ -208,6 +208,45 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>button_show_wordlist</tabstop>
+  <tabstop>wordList</tabstop>
+  <tabstop>textBrowser</tabstop>
+  <tabstop>button_quit</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>button_show_wordlist</sender>
+   <signal>clicked()</signal>
+   <receiver>wordList</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>535</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>115</x>
+     <y>275</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_quit</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>727</x>
+     <y>535</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

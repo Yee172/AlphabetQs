@@ -67,7 +67,12 @@ class Ui_Dialog(object):
         self.actionread_in.setObjectName("actionread_in")
 
         self.retranslateUi(Dialog)
+        self.button_show_wordlist.clicked.connect(self.wordList.hide)
+        self.button_quit.clicked.connect(Dialog.close)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        Dialog.setTabOrder(self.button_show_wordlist, self.wordList)
+        Dialog.setTabOrder(self.wordList, self.textBrowser)
+        Dialog.setTabOrder(self.textBrowser, self.button_quit)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
