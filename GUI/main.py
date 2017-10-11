@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'GUI.ui'
+# Form implementation generated from reading ui file 'main.ui'
 #
 # Created by: PyQt5 UI code generator 5.9
 #
@@ -13,14 +13,8 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(811, 562)
         Dialog.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
-        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(240, 510, 541, 51))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Help|QtWidgets.QDialogButtonBox.Ok)
-        self.buttonBox.setCenterButtons(True)
-        self.buttonBox.setObjectName("buttonBox")
         self.WordList = QtWidgets.QListView(Dialog)
-        self.WordList.setGeometry(QtCore.QRect(20, 40, 191, 511))
+        self.WordList.setGeometry(QtCore.QRect(20, 40, 191, 471))
         self.WordList.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.WordList.setObjectName("WordList")
         self.label_wl = QtWidgets.QLabel(Dialog)
@@ -62,10 +56,17 @@ class Ui_Dialog(object):
         self.label_console.setGeometry(QtCore.QRect(240, 220, 541, 21))
         self.label_console.setAlignment(QtCore.Qt.AlignCenter)
         self.label_console.setObjectName("label_console")
+        self.button_show_wordlist = QtWidgets.QPushButton(Dialog)
+        self.button_show_wordlist.setGeometry(QtCore.QRect(22, 520, 191, 32))
+        self.button_show_wordlist.setObjectName("button_show_wordlist")
+        self.button_quit = QtWidgets.QPushButton(Dialog)
+        self.button_quit.setGeometry(QtCore.QRect(672, 520, 111, 32))
+        self.button_quit.setObjectName("button_quit")
+        self.actionread_in = QtWidgets.QAction(Dialog)
+        self.actionread_in.setCheckable(False)
+        self.actionread_in.setObjectName("actionread_in")
 
         self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(Dialog.accept)
-        self.buttonBox.rejected.connect(Dialog.reject)
         Dialog.accepted.connect(self.WordList.show)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -78,4 +79,7 @@ class Ui_Dialog(object):
         self.label_samp.setText(_translate("Dialog", "SAMPLE SENTENCE"))
         self.label_samp_show.setText(_translate("Dialog", "<html><head/><body><p><br/></p></body></html>"))
         self.label_console.setText(_translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600;\">CONSOLE</span></p></body></html>"))
+        self.button_show_wordlist.setText(_translate("Dialog", "SHOW"))
+        self.button_quit.setText(_translate("Dialog", "QUIT"))
+        self.actionread_in.setText(_translate("Dialog", "read_in"))
 
