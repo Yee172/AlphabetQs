@@ -13,10 +13,10 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(811, 562)
         Dialog.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
-        self.WordList = QtWidgets.QListView(Dialog)
-        self.WordList.setGeometry(QtCore.QRect(20, 40, 191, 471))
-        self.WordList.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
-        self.WordList.setObjectName("WordList")
+        self.wordList = QtWidgets.QListView(Dialog)
+        self.wordList.setGeometry(QtCore.QRect(20, 40, 191, 471))
+        self.wordList.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
+        self.wordList.setObjectName("wordList")
         self.label_wl = QtWidgets.QLabel(Dialog)
         self.label_wl.setGeometry(QtCore.QRect(19, 20, 191, 20))
         self.label_wl.setAlignment(QtCore.Qt.AlignCenter)
@@ -67,7 +67,6 @@ class Ui_Dialog(object):
         self.actionread_in.setObjectName("actionread_in")
 
         self.retranslateUi(Dialog)
-        Dialog.accepted.connect(self.WordList.show)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):

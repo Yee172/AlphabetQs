@@ -16,7 +16,7 @@
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <widget class="QListView" name="WordList">
+  <widget class="QListView" name="wordList">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -209,22 +209,5 @@
   </action>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>Dialog</sender>
-   <signal>accepted()</signal>
-   <receiver>WordList</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>405</x>
-     <y>280</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>115</x>
-     <y>295</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
