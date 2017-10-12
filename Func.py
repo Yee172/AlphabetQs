@@ -2,7 +2,7 @@
 # coding: utf-8
 __author__ = 'Yee_172'
 __data__ = '2017/9/26'
-__all__ = ['find_word', 'clear_screen', 'random_word', 'definition_q', 'terminal_version_old']
+__all__ = ['alphabet', 'find_word', 'clear_screen', 'random_word', 'definition_q', 'terminal_version_old']
 
 
 import os
