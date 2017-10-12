@@ -27,7 +27,7 @@ def find_word(content):
                 return each
     if isinstance(content, str):
         letter = content[0].upper()
-        for each in alphabet.familys[letter].words:
+        for each in alphabet.families[letter].words:
             if each.word.lower() == content.lower():
                 return each
     return None

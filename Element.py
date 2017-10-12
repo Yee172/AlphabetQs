@@ -42,26 +42,17 @@ class Alphabet:
     def __init__(self, words):
         self.total = Word.total
         self.words = words
-        self.familys = {'A': Family('A', words), 'B': Family('B', words),
-                        'C': Family('C', words), 'D': Family('D', words),
-                        'E': Family('E', words), 'F': Family('F', words),
-                        'G': Family('G', words), 'H': Family('H', words),
-                        'I': Family('I', words), 'J': Family('J', words),
-                        'K': Family('K', words), 'L': Family('L', words),
-                        'M': Family('M', words), 'N': Family('N', words),
-                        'O': Family('O', words), 'P': Family('P', words),
-                        'Q': Family('Q', words), 'R': Family('R', words),
-                        'S': Family('S', words), 'T': Family('T', words),
-                        'U': Family('U', words), 'V': Family('V', words),
-                        'W': Family('W', words), 'X': Family('X', words),
-                        'Y': Family('Y', words), 'Z': Family('Z', words)}
+        families = set(each.family for each in self.words)
+        self.families = {}
+        for each in families:
+            self.families[each] = Family(each, words)
 
     def get_random(self, letter='all'):
         if letter.lower() in ['all', 'each', 'every']:
             if len(self.words) > 0:
                 return self.words[random.randint(0, len(self.words) - 1)]
         else:
-            words = self.familys[letter.upper()].words
+            words = self.families[letter.upper()].words
             if len(words) > 0:
                 return words[random.randint(0, len(words) - 1)]
         return None
