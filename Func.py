@@ -4,7 +4,6 @@ __author__ = 'Yee_172'
 __data__ = '2017/9/26'
 __all__ = ['alphabet', 'find_word', 'clear_screen', 'random_word', 'definition_q', 'terminal_version_old']
 
-
 import os
 import pandas as pd
 from Element import Word, Family, Alphabet
@@ -41,12 +40,16 @@ def random_word(letter='all'):
     return alphabet.get_random(letter)
 
 
+def str_process(string):
+    return string.translate(string.maketrans('', '', ' ,;')).lower()
+
+
 def definition_q(word):
     definition = input('Your definition: ')
     print()
     print('Your definition: %s' % definition)
     print('Real definition: %s' % word.definition)
-    if word.definition.lower() == definition.lower():
+    if str_process(word.definition) == str_process(definition):
         print('Exactly!')
     else:
         print('Not so good!')

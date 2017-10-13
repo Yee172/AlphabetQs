@@ -15,10 +15,10 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     def __init__(self):
         super(MainWin, self).__init__()
         self.setupUi(self)
-        self.wordList.setModel(MyListModel(alphabet.words))
+        self.wordList.setModel(ListModel(alphabet.words))
 
 
-class MyListModel(QtCore.QAbstractItemModel):
+class ListModel(QtCore.QAbstractItemModel):
     def __init__(self, date, parent=None, *args):
         QtCore.QAbstractItemModel.__init__(self, parent, *args)
         self.data = date

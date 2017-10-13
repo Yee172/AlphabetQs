@@ -220,7 +220,7 @@
    <sender>button_show_wordlist</sender>
    <signal>clicked()</signal>
    <receiver>wordList</receiver>
-   <slot>hide()</slot>
+   <slot>showNormal()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>117</x>
