@@ -13,21 +13,24 @@ from GUI.main import Ui_Dialog
 
 
 class MainWin(QtWidgets.QWidget, Ui_Dialog):
+
+    WORDLIST_NUM = 0
+
     def __init__(self):
         super(MainWin, self).__init__()
         self.setupUi(self)
-        # self.wordList.setModel(ListModel(alphabet.words))
-        model = QtGui.QStandardItemModel(0, 2, self)
-        model.setHeaderData(0, Qt.Horizontal, 'NUM')
-        model.setHeaderData(1, Qt.Horizontal, 'WORD')
-        self.add_data(model, 1, 'asdf')
-        self.add_data(model, 2, 'aadva')
-        self.wordList.setModel(model)
+        wordlist_model = QtGui.QStandardItemModel(0, 2, self)
+        wordlist_model.setHeaderData(0, Qt.Horizontal, 'NUM', Qt.DisplayRole)
+        wordlist_model.setHeaderData(1, Qt.Horizontal, 'WORD')
+        self.wordList.setModel(wordlist_model)
+        for each in alphabet.words:
+            self.add_data(wordlist_model, each.num, each.word)
 
     def add_data(self, model, num, word):
-        model.insertRow(0)
-        model.setData(model.index(0, 0), num)
-        model.setData(model.index(0, 1), word)
+        model.insertRow(self.WORDLIST_NUM)
+        model.setData(model.index(self.WORDLIST_NUM, 0), num)
+        model.setData(model.index(self.WORDLIST_NUM, 1), word)
+        self.WORDLIST_NUM += 1
 
 
 if __name__ == '__main__':
