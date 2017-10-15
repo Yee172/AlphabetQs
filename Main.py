@@ -15,14 +15,20 @@ from GUI.main import Ui_Dialog
 class MainWin(QtWidgets.QWidget, Ui_Dialog):
 
     WORDLIST_NUM = 0
+    EMPTY_MODEL = QtGui.QStandardItemModel()
 
     def __init__(self):
         super(MainWin, self).__init__()
         self.setupUi(self)
+        self.wordlist_operate()
+        self.button_show_wordlist.clicked.connect(self.wordlist.collapseAll)
+
+    def wordlist_operate(self):
         wordlist_model = QtGui.QStandardItemModel(0, 2, self)
-        wordlist_model.setHeaderData(0, Qt.Horizontal, 'NUM', Qt.DisplayRole)
+        wordlist_model.setHeaderData(0, Qt.Horizontal, '#')
         wordlist_model.setHeaderData(1, Qt.Horizontal, 'WORD')
-        self.wordList.setModel(wordlist_model)
+        self.wordlist.setModel(self.EMPTY_MODEL)
+        # self.wordlist.setColumnWidth(0, 30)
         for each in alphabet.words:
             self.add_data(wordlist_model, each.num, each.word)
 

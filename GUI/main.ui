@@ -16,7 +16,7 @@
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
-  <widget class="QTreeView" name="wordList">
+  <widget class="QTreeView" name="wordlist">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -31,9 +31,6 @@
    <property name="locale">
     <locale language="English" country="UnitedStates"/>
    </property>
-   <property name="midLineWidth">
-    <number>3</number>
-   </property>
    <property name="horizontalScrollBarPolicy">
     <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
@@ -44,10 +41,10 @@
     <bool>true</bool>
    </property>
    <property name="selectionMode">
-    <enum>QAbstractItemView::MultiSelection</enum>
+    <enum>QAbstractItemView::ExtendedSelection</enum>
    </property>
    <property name="selectionBehavior">
-    <enum>QAbstractItemView::SelectItems</enum>
+    <enum>QAbstractItemView::SelectRows</enum>
    </property>
    <property name="verticalScrollMode">
     <enum>QAbstractItemView::ScrollPerItem</enum>
@@ -56,7 +53,7 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_wl">
+  <widget class="QLabel" name="label_wordlist">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -237,7 +234,7 @@
  </widget>
  <tabstops>
   <tabstop>button_show_wordlist</tabstop>
-  <tabstop>wordList</tabstop>
+  <tabstop>wordlist</tabstop>
   <tabstop>textBrowser</tabstop>
   <tabstop>button_quit</tabstop>
  </tabstops>
@@ -256,22 +253,6 @@
     <hint type="destinationlabel">
      <x>405</x>
      <y>280</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>button_show_wordlist</sender>
-   <signal>clicked()</signal>
-   <receiver>wordList</receiver>
-   <slot>showNormal()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>117</x>
-     <y>535</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>115</x>
-     <y>275</y>
     </hint>
    </hints>
   </connection>
