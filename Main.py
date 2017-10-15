@@ -6,7 +6,8 @@ __data__ = '2017/9/26'
 
 from Func import *
 import sys
-from PyQt5 import QtCore
+from PyQt5.QtCore import Qt
+from PyQt5 import QtGui
 from PyQt5 import QtWidgets
 from GUI.main import Ui_Dialog
 
@@ -16,6 +17,17 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         super(MainWin, self).__init__()
         self.setupUi(self)
         # self.wordList.setModel(ListModel(alphabet.words))
+        model = QtGui.QStandardItemModel(0, 2, self)
+        model.setHeaderData(0, Qt.Horizontal, 'NUM')
+        model.setHeaderData(1, Qt.Horizontal, 'WORD')
+        self.add_data(model, 1, 'asdf')
+        self.add_data(model, 2, 'aadva')
+        self.wordList.setModel(model)
+
+    def add_data(self, model, num, word):
+        model.insertRow(0)
+        model.setData(model.index(0, 0), num)
+        model.setData(model.index(0, 1), word)
 
 
 # class ListModel(QtCore.QAbstractItemModel):
