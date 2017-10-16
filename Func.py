@@ -122,6 +122,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.setupUi(self)
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
         self.console.textChanged.connect(self.console_operate)
+        self.show()
 
     def wordlist_click(self):
         content = self.button_show_wordlist.text()
@@ -154,6 +155,10 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
 
     def console_operate(self):
         pass
+
+    def keyPressEvent(self, QKeyEvent):
+        if QKeyEvent.key() == Qt.Key_Escape:
+            self.close()
 
 
 # ---[test zone]---

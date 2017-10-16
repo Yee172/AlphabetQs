@@ -8,7 +8,6 @@ from Func import *
 
 
 win = MainWin()
-win.show()
 sys.exit(app.exec_())
 
 # terminal_version_old()
