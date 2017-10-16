@@ -2,8 +2,7 @@
 # coding: utf-8
 __author__ = 'Yee_172'
 __data__ = '2017/9/26'
-__all__ = ['alphabet', 'find_word', 'clear_screen', 'random_word', 'definition_q', 'terminal_version_old',
-           'MainWin', 'app', 'sys']
+__all__ = ['alphabet', 'terminal_version_old', 'MainWin', 'app', 'sys']
 
 import os
 import sys
@@ -121,7 +120,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         super(MainWin, self).__init__()
         self.setupUi(self)
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
-        self.console.textChanged.connect(self.console_operate)
+        self.console.textChanged.connect(self.info_show)
         self.show()
 
     def wordlist_click(self):
@@ -159,6 +158,11 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     def keyPressEvent(self, QKeyEvent):
         if QKeyEvent.key() == Qt.Key_Escape:
             self.close()
+
+    def info_show(self):
+        self.label_word_show.setText(alphabet.words[0].word)
+        self.label_def_show.setText(alphabet.words[0].definition)
+        self.label_samp_show.setText(alphabet.words[0].html_sample())
 
 
 # ---[test zone]---

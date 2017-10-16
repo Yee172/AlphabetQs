@@ -25,6 +25,9 @@ class Word:
     def get_sample(self):
         return self.sample.replace('``', '\033[1;31m').replace('`', '\033[0m')
 
+    def html_sample(self):
+        return self.sample.replace('``', '<html><head/><span style=" color:#ff0000;">').replace('`', '</span></html>')
+
 
 class Family:
     """
