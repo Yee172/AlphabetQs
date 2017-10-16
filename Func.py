@@ -7,7 +7,7 @@ __all__ = ['alphabet', 'terminal_version_old', 'MainWin', 'app', 'sys']
 import os
 import sys
 import pandas as pd
-from PyQt5 import QtGui, QtWidgets
+from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtCore import Qt, QCoreApplication
 from GUI.main import Ui_Dialog
 from Element import Word, Alphabet
@@ -121,6 +121,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.setupUi(self)
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
         self.console.textChanged.connect(self.info_show)
+        # self.console.returnPressed.connect(self.info_show)
         self.show()
 
     def wordlist_click(self):
