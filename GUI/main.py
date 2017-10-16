@@ -57,9 +57,9 @@ class Ui_Dialog(object):
         self.label_samp_show.setGeometry(QtCore.QRect(200, 160, 541, 41))
         self.label_samp_show.setAlignment(QtCore.Qt.AlignCenter)
         self.label_samp_show.setObjectName("label_samp_show")
-        self.textBrowser = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser.setGeometry(QtCore.QRect(200, 240, 541, 271))
-        self.textBrowser.setObjectName("textBrowser")
+        self.console = QtWidgets.QTextEdit(Dialog)
+        self.console.setGeometry(QtCore.QRect(200, 240, 541, 271))
+        self.console.setObjectName("console")
         self.label_console = QtWidgets.QLabel(Dialog)
         self.label_console.setGeometry(QtCore.QRect(200, 220, 541, 21))
         self.label_console.setAlignment(QtCore.Qt.AlignCenter)
@@ -78,8 +78,8 @@ class Ui_Dialog(object):
         self.button_quit.clicked.connect(Dialog.close)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         Dialog.setTabOrder(self.button_show_wordlist, self.wordlist)
-        Dialog.setTabOrder(self.wordlist, self.textBrowser)
-        Dialog.setTabOrder(self.textBrowser, self.button_quit)
+        Dialog.setTabOrder(self.wordlist, self.console)
+        Dialog.setTabOrder(self.console, self.button_quit)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate

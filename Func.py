@@ -121,6 +121,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         super(MainWin, self).__init__()
         self.setupUi(self)
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
+        self.console.textChanged.connect(self.console_operate)
 
     def wordlist_click(self):
         content = self.button_show_wordlist.text()
@@ -150,6 +151,9 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         model.setData(model.index(self.WORDLIST_NUM, 0), num)
         model.setData(model.index(self.WORDLIST_NUM, 1), word)
         self.WORDLIST_NUM += 1
+
+    def console_operate(self):
+        pass
 
 
 # ---[test zone]---
