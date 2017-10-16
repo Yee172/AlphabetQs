@@ -200,9 +200,9 @@
   <widget class="QPushButton" name="button_show_wordlist">
    <property name="geometry">
     <rect>
-     <x>32</x>
+     <x>25</x>
      <y>520</y>
-     <width>141</width>
+     <width>151</width>
      <height>32</height>
     </rect>
    </property>

@@ -65,7 +65,7 @@ class Ui_Dialog(object):
         self.label_console.setAlignment(QtCore.Qt.AlignCenter)
         self.label_console.setObjectName("label_console")
         self.button_show_wordlist = QtWidgets.QPushButton(Dialog)
-        self.button_show_wordlist.setGeometry(QtCore.QRect(32, 520, 141, 32))
+        self.button_show_wordlist.setGeometry(QtCore.QRect(25, 520, 151, 32))
         self.button_show_wordlist.setObjectName("button_show_wordlist")
         self.button_quit = QtWidgets.QPushButton(Dialog)
         self.button_quit.setGeometry(QtCore.QRect(632, 520, 111, 32))
