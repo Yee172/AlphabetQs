@@ -19,9 +19,9 @@
   <widget class="QTreeView" name="wordlist">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>40</y>
-     <width>141</width>
+     <width>161</width>
      <height>471</height>
     </rect>
    </property>
@@ -56,9 +56,9 @@
   <widget class="QLabel" name="label_wordlist">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>20</y>
-     <width>141</width>
+     <width>161</width>
      <height>20</height>
     </rect>
    </property>
@@ -200,9 +200,9 @@
   <widget class="QPushButton" name="button_show_wordlist">
    <property name="geometry">
     <rect>
-     <x>25</x>
+     <x>15</x>
      <y>520</y>
-     <width>151</width>
+     <width>171</width>
      <height>32</height>
     </rect>
    </property>
