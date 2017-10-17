@@ -9,5 +9,3 @@ from Func import *
 
 win = MainWin()
 sys.exit(app.exec_())
-
-# terminal_version_old()
