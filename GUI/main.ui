@@ -79,7 +79,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>WORD</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;WORD&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="textFormat">
     <enum>Qt::AutoText</enum>
@@ -117,7 +117,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>DEFINITION</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;DEFINITION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -149,7 +149,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>SAMPLE SENTENCE</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;SAMPLE SENTENCE&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -171,13 +171,13 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="console">
+  <widget class="QTextBrowser" name="console_show_history">
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>240</y>
+     <y>250</y>
      <width>541</width>
-     <height>271</height>
+     <height>241</height>
     </rect>
    </property>
   </widget>
@@ -185,7 +185,7 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>220</y>
+     <y>230</y>
      <width>541</width>
      <height>21</height>
     </rect>
@@ -223,6 +223,29 @@
     <string>QUIT</string>
    </property>
   </widget>
+  <widget class="QLineEdit" name="console">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>490</y>
+     <width>541</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_mode">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>230</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#0000ff;&quot;&gt;SEARCH&lt;/span&gt; MODE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
   <action name="actionread_in">
    <property name="checkable">
     <bool>false</bool>
@@ -233,10 +256,11 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>button_show_wordlist</tabstop>
-  <tabstop>wordlist</tabstop>
   <tabstop>console</tabstop>
+  <tabstop>button_show_wordlist</tabstop>
   <tabstop>button_quit</tabstop>
+  <tabstop>console_show_history</tabstop>
+  <tabstop>wordlist</tabstop>
  </tabstops>
  <resources/>
  <connections>

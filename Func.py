@@ -6,6 +6,7 @@ __all__ = ['alphabet', 'terminal_version_old', 'MainWin', 'app', 'sys']
 
 import os
 import sys
+import time
 import pandas as pd
 from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtCore import Qt, QCoreApplication
@@ -113,26 +114,24 @@ def terminal_version_old():
 
 class MainWin(QtWidgets.QWidget, Ui_Dialog):
 
+    MODE = 'SEARCH'
     WORDLIST_NUM = 0
+    HISTORY_NUM = 0
     EMPTY_MODEL = QtGui.QStandardItemModel()
 
     def __init__(self):
         super(MainWin, self).__init__()
         self.setupUi(self)
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
-        self.console.textChanged.connect(self.info_show)
-        # self.console.returnPressed.connect(self.info_show)
+        self.console.returnPressed.connect(self.console_operate)
         self.show()
 
     def wordlist_click(self):
         content = self.button_show_wordlist.text()
-        _translate = QCoreApplication.translate
         if content == 'SHOW':
             self.wordlist_show()
-            self.button_show_wordlist.setText(_translate("Dialog", "HIDE"))
         if content == 'HIDE':
             self.wordlist_hide()
-            self.button_show_wordlist.setText(_translate("Dialog", "SHOW"))
 
     def wordlist_show(self):
         wordlist_model = QtGui.QStandardItemModel(0, 2, self)
@@ -142,10 +141,14 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.wordlist.setColumnWidth(0, 30)
         for each in alphabet.words:
             self.add_data(wordlist_model, each.num, each.word)
+        _translate = QCoreApplication.translate
+        self.button_show_wordlist.setText(_translate("Dialog", "HIDE"))
 
     def wordlist_hide(self):
         self.wordlist.setModel(self.EMPTY_MODEL)
         self.WORDLIST_NUM = 0
+        _translate = QCoreApplication.translate
+        self.button_show_wordlist.setText(_translate("Dialog", "SHOW"))
 
     def add_data(self, model, num, word):
         model.insertRow(self.WORDLIST_NUM)
@@ -154,7 +157,62 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.WORDLIST_NUM += 1
 
     def console_operate(self):
-        pass
+        def read(content):
+            content = content.lower()
+            if content == 'help':
+                show_help()
+            elif content == 'clear':
+                clear()
+            elif content[:4] == 'mode':
+                mode = str_process(content[4:])
+                if not mode:
+                    mode_change()
+                elif mode in ['s', 'sear', 'search']:
+                    mode_change('SEARCH')
+                elif mode in ['r', 'rand', 'random']:
+                    mode_change('RANDOM')
+            elif content == 'show':
+                self.wordlist_show()
+                self.console_show_history.append('Word list showed')
+            elif content == 'hide':
+                self.wordlist_hide()
+                self.console_show_history.append('word list hid')
+            else:
+                self.console_show_history.append('Undefined')
+
+        def show_help():
+            self.console_show_history.append('help'.ljust(7) + '\t->\t' + 'Help information')
+            self.console_show_history.append('clear'.ljust(7) + '\t->\t' + 'Clear all the history')
+            self.console_show_history.append('mode'.ljust(7) + '\t->\t' + 'Show or change the mode')
+            self.console_show_history.append(''.ljust(7) + '\t\tExample: ' + 'mode random')
+            self.console_show_history.append('show'.ljust(7) + '\t->\t' + 'Show the word list')
+            self.console_show_history.append('hide'.ljust(7) + '\t->\t' + 'Hide the word list')
+
+        def clear():
+            self.HISTORY_NUM = 0
+            self.console_show_history.clear()
+
+        def mode_change(mode=''):
+            if mode:
+                self.MODE = mode
+                self.label_mode.setText('<html><head/><body><p>'
+                                        '<span style=" font-weight:600; color:#0000ff;">'
+                                        '%s'
+                                        '</span>'
+                                        ' MODE'
+                                        '</p></body></html>' % self.MODE)
+                self.console_show_history.append('MODE change into %s' % self.MODE)
+            else:
+                self.console_show_history.append('MODE now is %s' % self.MODE)
+
+        def search_definition_q():
+            pass
+
+        self.HISTORY_NUM += 1
+        text = self.console.text()
+        self.console.setText('')
+        self.console_show_history.append('[%d]>>> ' % self.HISTORY_NUM + text)
+        read(text)
 
     def keyPressEvent(self, QKeyEvent):
         if QKeyEvent.key() == Qt.Key_Escape:
