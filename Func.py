@@ -120,7 +120,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     MODE = 'SEARCH'
     WORD = None
     CODE = 0
-    LENGTH = 70
+    LENGTH = 60
     COMMANDING = 1
     WORDLIST_NUM = 0
     HISTORY_NUM = 0
@@ -158,6 +158,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         wordlist_model.setHeaderData(1, Qt.Horizontal, 'WORD')
         self.wordlist.setModel(wordlist_model)
         self.wordlist.setColumnWidth(0, 30)
+        self.wordlist.setColumnWidth(1, 30)
         for each in alphabet.words:
             self.add_data(wordlist_model, each.num, each.word)
         _translate = QCoreApplication.translate
