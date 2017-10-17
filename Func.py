@@ -6,9 +6,8 @@ __all__ = ['alphabet', 'terminal_version_old', 'MainWin', 'app', 'sys']
 
 import os
 import sys
-import time
 import pandas as pd
-from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QCoreApplication
 from GUI.main import Ui_Dialog
 from Element import Word, Alphabet
@@ -26,16 +25,20 @@ alphabet = Alphabet([Word(x) for x in read_in(PATH)])
 
 
 def find_word(content):
-    if not content: return None
-    if isinstance(content, int):
-        for each in alphabet.words:
-            if each.num == content:
-                return each
-    if isinstance(content, str):
-        letter = content[0].upper()
-        for each in alphabet.families[letter].words:
-            if each.word.lower() == content.lower():
-                return each
+    if not content:
+        return None
+    try:
+        if isinstance(content, int):
+            for each in alphabet.words:
+                if each.num == content:
+                    return each
+        if isinstance(content, str):
+            letter = content[0].upper()
+            for each in alphabet.families[letter].words:
+                if each.word.lower() == content.lower():
+                    return each
+    except:
+        return None
     return None
 
 
@@ -68,7 +71,7 @@ def definition_q(word):
 def terminal_version_old():
     MODE = 'SEARCH'
     RANDOM_LETTER = 'all'
-    print('Initail mode is SEARCH mode!')
+    print('Initial mode is SEARCH mode!')
     while 1:
         if MODE.lower() == 'search':
             print()
@@ -115,6 +118,10 @@ def terminal_version_old():
 class MainWin(QtWidgets.QWidget, Ui_Dialog):
 
     MODE = 'SEARCH'
+    WORD = None
+    CODE = 0
+    LENGTH = 70
+    COMMANDING = 1
     WORDLIST_NUM = 0
     HISTORY_NUM = 0
     EMPTY_MODEL = QtGui.QStandardItemModel()
@@ -122,9 +129,21 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     def __init__(self):
         super(MainWin, self).__init__()
         self.setupUi(self)
+        self.initializing()
+        self.wordlist_show()
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
+        self.button_help.clicked.connect(self.show_help)
         self.console.returnPressed.connect(self.console_operate)
+        self.check_code.stateChanged.connect(self.code_update)
         self.show()
+
+    def code_update(self):
+        self.CODE = self.check_code.checkState()
+
+    def initializing(self):
+        self.console_show_history.append('Initial mode is SEARCH MODE!')
+        self.console_show_history.append('You can input word or num!')
+        self.console_show_history.append('Input `help` for more commands available!')
 
     def wordlist_click(self):
         content = self.button_show_wordlist.text()
@@ -156,37 +175,54 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         model.setData(model.index(self.WORDLIST_NUM, 1), word)
         self.WORDLIST_NUM += 1
 
+    def show_help(self):
+        self.console_show_history.append(''.center(self.LENGTH, '-'))
+        self.console_show_history.append('help'.ljust(7) + '\t->\t' + 'Help information')
+        self.console_show_history.append('clear'.ljust(7) + '\t->\t' + 'Clear all the history')
+        self.console_show_history.append('mode'.ljust(7) + '\t->\t' + 'Show or change the mode')
+        self.console_show_history.append(''.ljust(7) + '\t\t      Example: ' + 'mode random')
+        self.console_show_history.append('show'.ljust(7) + '\t->\t' + 'Show the word list')
+        self.console_show_history.append('hide'.ljust(7) + '\t->\t' + 'Hide the word list')
+        self.console_show_history.append(''.center(self.LENGTH, '-'))
+
     def console_operate(self):
         def read(content):
             content = content.lower()
-            if content == 'help':
-                show_help()
-            elif content == 'clear':
-                clear()
-            elif content[:4] == 'mode':
-                mode = str_process(content[4:])
-                if not mode:
-                    mode_change()
-                elif mode in ['s', 'sear', 'search']:
-                    mode_change('SEARCH')
-                elif mode in ['r', 'rand', 'random']:
-                    mode_change('RANDOM')
-            elif content == 'show':
-                self.wordlist_show()
-                self.console_show_history.append('Word list showed')
-            elif content == 'hide':
-                self.wordlist_hide()
-                self.console_show_history.append('word list hid')
+            if self.WORD is None:
+                if content == 'help':
+                    self.show_help()
+                elif content == 'clear':
+                    clear()
+                elif content[:4] == 'mode':
+                    mode = str_process(content[4:])
+                    if not mode:
+                        mode_change()
+                    elif mode in ['s', 'sear', 'search']:
+                        mode_change('SEARCH')
+                    elif mode in ['r', 'rand', 'random']:
+                        mode_change('RANDOM')
+                elif content == 'show':
+                    self.wordlist_show()
+                    self.console_show_history.append('Word list showed')
+                elif content == 'hide':
+                    self.wordlist_hide()
+                    self.console_show_history.append('word list hid')
+                elif self.MODE == 'SEARCH' and ' ' not in content:
+                    try:
+                        content = int(content)
+                    except:
+                        pass
+                    self.WORD = find_word(content)
+                    if self.WORD is None:
+                        self.console_show_history.append('Undefined')
+                    else:
+                        self.info_clear()
+                        self.label_word_show.setText(self.WORD.word)
+                else:
+                    self.console_show_history.append('Undefined')
             else:
-                self.console_show_history.append('Undefined')
-
-        def show_help():
-            self.console_show_history.append('help'.ljust(7) + '\t->\t' + 'Help information')
-            self.console_show_history.append('clear'.ljust(7) + '\t->\t' + 'Clear all the history')
-            self.console_show_history.append('mode'.ljust(7) + '\t->\t' + 'Show or change the mode')
-            self.console_show_history.append(''.ljust(7) + '\t\tExample: ' + 'mode random')
-            self.console_show_history.append('show'.ljust(7) + '\t->\t' + 'Show the word list')
-            self.console_show_history.append('hide'.ljust(7) + '\t->\t' + 'Hide the word list')
+                search_q(self.WORD, content)
+                self.WORD = None
 
         def clear():
             self.HISTORY_NUM = 0
@@ -201,27 +237,47 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                                         '</span>'
                                         ' MODE'
                                         '</p></body></html>' % self.MODE)
-                self.console_show_history.append('MODE change into %s' % self.MODE)
+                self.console_show_history.append('MODE changed into %s' % self.MODE)
             else:
                 self.console_show_history.append('MODE now is %s' % self.MODE)
 
-        def search_definition_q():
-            pass
+        def search_q(word, definition):
+            self.console_show_history.append(''.center(self.LENGTH, '-'))
+            if str_process(word.definition) == str_process(definition):
+                self.console_show_history.append('<html><head/>'
+                                                 '<﻿span style=" font-weight:600; color:#ff0000;">'
+                                                 '√'
+                                                 '</span></html>')
+            else:
+                self.console_show_history.append('<html><head/>'
+                                                 '<﻿span style=" font-weight:600; color:#ff0000;">'
+                                                 '×'
+                                                 '</span></html>')
+            self.console_show_history.append('↓\tYour definition\t↓\n%s' % definition)
+            self.console_show_history.append('%s\n↑\tReal definition\t↑' % word.definition)
+            self.console_show_history.append(''.center(self.LENGTH, '-'))
+            self.info_show(word)
 
         self.HISTORY_NUM += 1
         text = self.console.text()
         self.console.setText('')
-        self.console_show_history.append('[%d]>>> ' % self.HISTORY_NUM + text)
+        if self.CODE:
+            self.console_show_history.append('[%d]>>> ' % self.HISTORY_NUM + text)
         read(text)
 
     def keyPressEvent(self, QKeyEvent):
         if QKeyEvent.key() == Qt.Key_Escape:
             self.close()
 
-    def info_show(self):
-        self.label_word_show.setText(alphabet.words[0].word)
-        self.label_def_show.setText(alphabet.words[0].definition)
-        self.label_samp_show.setText(alphabet.words[0].html_sample())
+    def info_show(self, word):
+        self.label_word_show.setText(word.word)
+        self.label_def_show.setText(word.definition)
+        self.label_samp_show.setText(word.html_sample())
+
+    def info_clear(self):
+        self.label_word_show.setText('')
+        self.label_def_show.setText('')
+        self.label_samp_show.setText('')
 
 
 # ---[test zone]---
