@@ -275,6 +275,19 @@
     <bool>false</bool>
    </property>
   </widget>
+  <widget class="QPushButton" name="button_clear">
+   <property name="geometry">
+    <rect>
+     <x>676</x>
+     <y>486</y>
+     <width>71</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CLEAR</string>
+   </property>
+  </widget>
   <action name="actionread_in">
    <property name="checkable">
     <bool>false</bool>

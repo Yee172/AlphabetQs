@@ -83,6 +83,9 @@ class Ui_Dialog(object):
         self.check_code.setGeometry(QtCore.QRect(680, 230, 61, 20))
         self.check_code.setChecked(False)
         self.check_code.setObjectName("check_code")
+        self.button_clear = QtWidgets.QPushButton(Dialog)
+        self.button_clear.setGeometry(QtCore.QRect(676, 486, 71, 32))
+        self.button_clear.setObjectName("button_clear")
         self.actionread_in = QtWidgets.QAction(Dialog)
         self.actionread_in.setCheckable(False)
         self.actionread_in.setObjectName("actionread_in")
@@ -109,5 +112,6 @@ class Ui_Dialog(object):
         self.label_mode.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-weight:600; color:#0000ff;\">SEARCH</span> MODE</p></body></html>"))
         self.button_help.setText(_translate("Dialog", "HELP"))
         self.check_code.setText(_translate("Dialog", "CODE"))
+        self.button_clear.setText(_translate("Dialog", "CLEAR"))
         self.actionread_in.setText(_translate("Dialog", "read_in"))
 

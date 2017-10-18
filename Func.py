@@ -133,6 +133,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.wordlist_show()
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
         self.button_help.clicked.connect(self.show_help)
+        self.button_clear.clicked.connect(self.clear)
         self.console.returnPressed.connect(self.console_operate)
         self.check_code.stateChanged.connect(self.code_update)
         self.show()
@@ -186,6 +187,10 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.console_show_history.append('hide'.ljust(7) + '\t->\t' + 'Hide the word list')
         self.console_show_history.append(''.center(self.LENGTH, '-'))
 
+    def clear(self):
+        self.HISTORY_NUM = 0
+        self.console_show_history.clear()
+
     def console_operate(self):
         def read(content):
             content = content.lower()
@@ -193,7 +198,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                 if content == 'help':
                     self.show_help()
                 elif content == 'clear':
-                    clear()
+                    self.clear()
                 elif content[:4] == 'mode':
                     mode = str_process(content[4:])
                     if not mode:
@@ -224,10 +229,6 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
             else:
                 search_q(self.WORD, content)
                 self.WORD = None
-
-        def clear():
-            self.HISTORY_NUM = 0
-            self.console_show_history.clear()
 
         def mode_change(mode=''):
             if mode:
