@@ -51,7 +51,7 @@ def random_word(letter='all'):
 
 
 def str_process(string):
-    return string.translate(string.maketrans('', '', ' ,;()')).lower()
+    return string.translate(string.maketrans('', '', ' ,;()[]{}')).lower()
 
 
 def definition_q(word):
