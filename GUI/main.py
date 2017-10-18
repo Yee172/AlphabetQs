@@ -56,6 +56,7 @@ class Ui_Dialog(object):
         self.label_samp_show = QtWidgets.QLabel(Dialog)
         self.label_samp_show.setGeometry(QtCore.QRect(200, 160, 541, 41))
         self.label_samp_show.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_samp_show.setWordWrap(True)
         self.label_samp_show.setObjectName("label_samp_show")
         self.console_show_history = QtWidgets.QTextBrowser(Dialog)
         self.console_show_history.setGeometry(QtCore.QRect(200, 250, 541, 241))
