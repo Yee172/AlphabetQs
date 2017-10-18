@@ -288,6 +288,22 @@
     <string>CLEAR</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_info">
+   <property name="geometry">
+    <rect>
+     <x>309</x>
+     <y>525</y>
+     <width>321</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <action name="actionread_in">
    <property name="checkable">
     <bool>false</bool>

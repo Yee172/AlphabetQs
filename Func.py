@@ -224,6 +224,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     else:
                         self.info_clear()
                         self.label_word_show.setText(self.WORD.word)
+                        self.label_info.setText('Acquire definition of [%s]' % self.WORD.word)
                 else:
                     self.console_show_history.append('Undefined')
             else:
