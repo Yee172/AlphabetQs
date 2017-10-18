@@ -51,7 +51,7 @@ def random_word(letter='all'):
 
 
 def str_process(string):
-    return string.translate(string.maketrans('', '', ' ,;')).lower()
+    return string.translate(string.maketrans('', '', ' ,;()')).lower()
 
 
 def definition_q(word):
@@ -224,12 +224,13 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     else:
                         self.info_clear()
                         self.label_word_show.setText(self.WORD.word)
-                        self.label_info.setText('Acquire definition of [%s]' % self.WORD.word)
+                        self.label_info.setText('Definition of [%s] required' % self.WORD.word)
                 else:
                     self.console_show_history.append('Undefined')
             else:
                 search_q(self.WORD, content)
                 self.WORD = None
+                self.label_info.setText('')
 
         def mode_change(mode=''):
             if mode:
