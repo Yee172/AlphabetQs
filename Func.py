@@ -136,10 +136,15 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.button_clear.clicked.connect(self.clear)
         self.console.returnPressed.connect(self.console_operate)
         self.check_code.stateChanged.connect(self.code_update)
+        self.combo_box_mode.currentIndexChanged.connect(self.mode_update)
         self.show()
 
     def code_update(self):
         self.CODE = self.check_code.checkState()
+
+    def mode_update(self):
+        self.MODE = self.combo_box_mode.currentText()
+        self.console_show_history.append('MODE changed into %s' % self.MODE)
 
     def initializing(self):
         self.console_show_history.append('Initial mode is SEARCH MODE!')
@@ -185,6 +190,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.console_show_history.append(''.ljust(7) + '\t\t      Example: ' + 'mode random')
         self.console_show_history.append('show'.ljust(7) + '\t->\t' + 'Show the word list')
         self.console_show_history.append('hide'.ljust(7) + '\t->\t' + 'Hide the word list')
+        self.console_show_history.append('quit'.ljust(7) + '\t->\t' + 'Exit the program')
         self.console_show_history.append(''.center(self.LENGTH, '-'))
 
     def clear(self):
@@ -213,6 +219,8 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                 elif content == 'hide':
                     self.wordlist_hide()
                     self.console_show_history.append('word list hid')
+                elif content == 'quit':
+                    pass
                 elif self.MODE == 'SEARCH' and ' ' not in content:
                     try:
                         content = int(content)
@@ -235,12 +243,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         def mode_change(mode=''):
             if mode:
                 self.MODE = mode
-                self.label_mode.setText('<html><head/><body><p>'
-                                        '<span style=" font-weight:600; color:#0000ff;">'
-                                        '%s'
-                                        '</span>'
-                                        ' MODE'
-                                        '</p></body></html>' % self.MODE)
+                self.combo_box_mode.setCurrentIndex({'SEARCH': 0, 'RANDOM': 1}[mode])
                 self.console_show_history.append('MODE changed into %s' % self.MODE)
             else:
                 self.console_show_history.append('MODE now is %s' % self.MODE)

@@ -236,19 +236,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_mode">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>230</y>
-     <width>111</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#0000ff;&quot;&gt;SEARCH&lt;/span&gt; MODE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="button_help">
    <property name="geometry">
     <rect>
@@ -306,6 +293,32 @@
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
+  </widget>
+  <widget class="QComboBox" name="combo_box_mode">
+   <property name="geometry">
+    <rect>
+     <x>198</x>
+     <y>227</y>
+     <width>101</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="currentText">
+    <string>SEARCH</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <item>
+    <property name="text">
+     <string>SEARCH</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>RANDOM</string>
+    </property>
+   </item>
   </widget>
   <action name="actionread_in">
    <property name="checkable">
