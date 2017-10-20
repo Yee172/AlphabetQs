@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AlphabetQs</class>
- <widget class="QDialog" name="AlphabetQs">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>AlphabetQs</string>
   </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
@@ -341,7 +341,7 @@
   <connection>
    <sender>button_quit</sender>
    <signal>clicked()</signal>
-   <receiver>AlphabetQs</receiver>
+   <receiver>Dialog</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">

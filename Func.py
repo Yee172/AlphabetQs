@@ -9,7 +9,7 @@ import sys
 import pandas as pd
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QCoreApplication
-from GUI.main import Ui_AlphabetQs
+from GUI.main import Ui_Dialog
 from Element import Word, Alphabet
 
 
@@ -115,7 +115,7 @@ def terminal_version_old():
             definition_q(word)
 
 
-class MainWin(QtWidgets.QWidget, Ui_AlphabetQs):
+class MainWin(QtWidgets.QWidget, Ui_Dialog):
 
     MODE = 'SEARCH'
     WORD = None
@@ -168,13 +168,13 @@ class MainWin(QtWidgets.QWidget, Ui_AlphabetQs):
         for each in alphabet.words:
             self.add_data(wordlist_model, each.num, each.word)
         _translate = QCoreApplication.translate
-        self.button_show_wordlist.setText(_translate("AlphabetQs", "HIDE"))
+        self.button_show_wordlist.setText(_translate("Dialog", "HIDE"))
 
     def wordlist_hide(self):
         self.wordlist.setModel(self.EMPTY_MODEL)
         self.WORDLIST_NUM = 0
         _translate = QCoreApplication.translate
-        self.button_show_wordlist.setText(_translate("AlphabetQs", "SHOW"))
+        self.button_show_wordlist.setText(_translate("Dialog", "SHOW"))
 
     def add_data(self, model, num, word):
         model.insertRow(self.WORDLIST_NUM)
@@ -195,7 +195,10 @@ class MainWin(QtWidgets.QWidget, Ui_AlphabetQs):
 
     def clear(self):
         self.HISTORY_NUM = 0
+        self.WORD = None
         self.console_show_history.clear()
+        self.info_clear()
+        self.label_info.setText('')
 
     def console_operate(self):
         def read(content):
