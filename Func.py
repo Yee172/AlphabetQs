@@ -223,7 +223,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     self.wordlist_hide()
                     self.console_show_history.append('word list hid')
                 elif content == 'quit':
-                    pass
+                    self.close()
                 elif self.MODE == 'SEARCH' and ' ' not in content:
                     try:
                         content = int(content)
