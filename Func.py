@@ -288,7 +288,3 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.label_word_show.setText('')
         self.label_def_show.setText('')
         self.label_samp_show.setText('')
-
-
-# ---[test zone]---
-# print(alphabet.get_random('A').word)
