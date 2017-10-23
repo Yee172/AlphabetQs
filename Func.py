@@ -120,6 +120,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     MODE = 'SEARCH'
     WORD = None
     CODE = 0
+    MORE = 0
     LENGTH = 60
     COMMANDING = 1
     WORDLIST_NUM = 0
@@ -148,7 +149,11 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.console_show_history.append('MODE changed into %s' % self.MODE)
 
     def more_info(self):
-        self.resize(1200, 562)
+        self.MORE = self.check_more.checkState()
+        if self.MORE:
+            self.resize(1200, 562)
+        else:
+            self.resize(770, 562)
 
     def initializing(self):
         self.console_show_history.append('Initial mode is SEARCH MODE!')
