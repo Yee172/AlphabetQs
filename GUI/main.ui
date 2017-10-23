@@ -336,6 +336,19 @@
     <string>Search # or word</string>
    </property>
   </widget>
+  <widget class="QCheckBox" name="check_more">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>40</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>MORE</string>
+   </property>
+  </widget>
   <action name="actionread_in">
    <property name="checkable">
     <bool>false</bool>

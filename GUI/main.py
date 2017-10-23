@@ -97,6 +97,9 @@ class Ui_Dialog(object):
         self.search_box = QtWidgets.QLineEdit(Dialog)
         self.search_box.setGeometry(QtCore.QRect(20, 40, 161, 21))
         self.search_box.setObjectName("search_box")
+        self.check_more = QtWidgets.QCheckBox(Dialog)
+        self.check_more.setGeometry(QtCore.QRect(700, 40, 71, 20))
+        self.check_more.setObjectName("check_more")
         self.actionread_in = QtWidgets.QAction(Dialog)
         self.actionread_in.setCheckable(False)
         self.actionread_in.setObjectName("actionread_in")
@@ -129,5 +132,6 @@ class Ui_Dialog(object):
         self.combo_box_mode.setItemText(1, _translate("Dialog", "RANDOM"))
         self.search_box.setWhatsThis(_translate("Dialog", "Search Box"))
         self.search_box.setPlaceholderText(_translate("Dialog", "Search # or word"))
+        self.check_more.setText(_translate("Dialog", "MORE"))
         self.actionread_in.setText(_translate("Dialog", "read_in"))
 
