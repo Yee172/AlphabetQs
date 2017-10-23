@@ -98,7 +98,7 @@ class Ui_Dialog(object):
         self.search_box.setGeometry(QtCore.QRect(20, 40, 161, 21))
         self.search_box.setObjectName("search_box")
         self.check_more = QtWidgets.QCheckBox(Dialog)
-        self.check_more.setGeometry(QtCore.QRect(700, 40, 71, 20))
+        self.check_more.setGeometry(QtCore.QRect(680, 40, 71, 20))
         self.check_more.setObjectName("check_more")
         self.actionread_in = QtWidgets.QAction(Dialog)
         self.actionread_in.setCheckable(False)

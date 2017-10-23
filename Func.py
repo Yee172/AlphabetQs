@@ -136,6 +136,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.button_clear.clicked.connect(self.clear)
         self.console.returnPressed.connect(self.console_operate)
         self.check_code.stateChanged.connect(self.code_update)
+        self.check_more.stateChanged.connect(self.more_info)
         self.combo_box_mode.currentIndexChanged.connect(self.mode_update)
         self.show()
 
@@ -145,6 +146,9 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     def mode_update(self):
         self.MODE = self.combo_box_mode.currentText()
         self.console_show_history.append('MODE changed into %s' % self.MODE)
+
+    def more_info(self):
+        self.resize(1200, 562)
 
     def initializing(self):
         self.console_show_history.append('Initial mode is SEARCH MODE!')
