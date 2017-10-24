@@ -122,7 +122,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     CODE = 0
     MORE = 0
     LENGTH = 60
-    CONTAIN = 1
+    CONTAIN = 0
     COMMANDING = 1
     WORDLIST_NUM = 0
     HISTORY_NUM = 0
@@ -174,29 +174,38 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                 return result
             else:
                 for each in alphabet.words:
-                    if content == str(each.num)[:len(content)]:
+                    if content == ('%03d' % each.num)[:len(content)]:
                         result.append(each)
                 return result
         except:
+            content = content.lower()
             if self.CONTAIN:
                 for each in alphabet.words:
-                    if content in each.word:
+                    if content in each.word.lower():
                         result.append(each)
                 return result
             else:
                 for each in alphabet.words:
-                    if content == each.word[:len(content)]:
+                    if content == each.word[:len(content)].lower():
                         result.append(each)
                 return result
 
     def search(self):
         self.SEARCH_CONTENT = self.search_box.text()
-        self.wordlist_click()
+        if self.SEARCH_CONTENT:
+            if self.button_show_wordlist.text() == 'HIDE':
+                self.wordlist_show(self.search_words(self.SEARCH_CONTENT))
+        else:
+            if self.button_show_wordlist.text() == 'HIDE':
+                self.wordlist_show()
 
     def wordlist_click(self):
         content = self.button_show_wordlist.text()
         if content == 'SHOW':
-            self.wordlist_show(self.search_words(self.SEARCH_CONTENT) or alphabet.words)
+            if self.SEARCH_CONTENT:
+                self.wordlist_show(self.search_words(self.SEARCH_CONTENT))
+            else:
+                self.wordlist_show()
         if content == 'HIDE':
             self.wordlist_hide()
 
@@ -205,8 +214,9 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         wordlist_model.setHeaderData(0, Qt.Horizontal, '#')
         wordlist_model.setHeaderData(1, Qt.Horizontal, 'WORD')
         self.wordlist.setModel(wordlist_model)
-        self.wordlist.setColumnWidth(0, 30)
+        self.wordlist.setColumnWidth(0, 40)
         self.wordlist.setColumnWidth(1, 30)
+        self.WORDLIST_NUM = 0
         if words:
             for each in words:
                 self.add_data(wordlist_model, '%03d' % each.num, each.word)
@@ -215,7 +225,6 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
 
     def wordlist_hide(self):
         self.wordlist.setModel(self.EMPTY_MODEL)
-        self.WORDLIST_NUM = 0
         _translate = QCoreApplication.translate
         self.button_show_wordlist.setText(_translate("Dialog", "SHOW"))
 
