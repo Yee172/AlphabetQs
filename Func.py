@@ -122,9 +122,11 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     CODE = 0
     MORE = 0
     LENGTH = 60
+    CONTAIN = 1
     COMMANDING = 1
     WORDLIST_NUM = 0
     HISTORY_NUM = 0
+    SEARCH_CONTENT = ''
     EMPTY_MODEL = QtGui.QStandardItemModel()
 
     def __init__(self):
@@ -139,6 +141,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.check_code.stateChanged.connect(self.code_update)
         self.check_more.stateChanged.connect(self.more_info)
         self.combo_box_mode.currentIndexChanged.connect(self.mode_update)
+        self.search_box.textChanged.connect(self.search)
         self.show()
 
     def code_update(self):
@@ -160,22 +163,53 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.console_show_history.append('You can input word or num!')
         self.console_show_history.append('Input `help` for more commands available!')
 
+    def search_words(self, content):
+        result = []
+        try:
+            temp = int(content)
+            if self.CONTAIN:
+                for each in alphabet.words:
+                    if content in '%03d' % each.num:
+                        result.append(each)
+                return result
+            else:
+                for each in alphabet.words:
+                    if content == str(each.num)[:len(content)]:
+                        result.append(each)
+                return result
+        except:
+            if self.CONTAIN:
+                for each in alphabet.words:
+                    if content in each.word:
+                        result.append(each)
+                return result
+            else:
+                for each in alphabet.words:
+                    if content == each.word[:len(content)]:
+                        result.append(each)
+                return result
+
+    def search(self):
+        self.SEARCH_CONTENT = self.search_box.text()
+        self.wordlist_click()
+
     def wordlist_click(self):
         content = self.button_show_wordlist.text()
         if content == 'SHOW':
-            self.wordlist_show()
+            self.wordlist_show(self.search_words(self.SEARCH_CONTENT) or alphabet.words)
         if content == 'HIDE':
             self.wordlist_hide()
 
-    def wordlist_show(self):
+    def wordlist_show(self, words=alphabet.words):
         wordlist_model = QtGui.QStandardItemModel(0, 2, self)
         wordlist_model.setHeaderData(0, Qt.Horizontal, '#')
         wordlist_model.setHeaderData(1, Qt.Horizontal, 'WORD')
         self.wordlist.setModel(wordlist_model)
         self.wordlist.setColumnWidth(0, 30)
         self.wordlist.setColumnWidth(1, 30)
-        for each in alphabet.words:
-            self.add_data(wordlist_model, each.num, each.word)
+        if words:
+            for each in words:
+                self.add_data(wordlist_model, '%03d' % each.num, each.word)
         _translate = QCoreApplication.translate
         self.button_show_wordlist.setText(_translate("Dialog", "HIDE"))
 
