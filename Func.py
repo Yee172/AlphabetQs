@@ -288,6 +288,11 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                         self.info_clear()
                         self.label_word_show.setText(self.WORD.word)
                         self.label_info.setText('Definition of [%s] required' % self.WORD.word)
+                elif self.MODE == 'RANDOM':
+                    self.WORD = alphabet.get_random()
+                    self.info_clear()
+                    self.label_word_show.setText(self.WORD.word)
+                    self.label_info.setText('Definition of [%s] required' % self.WORD.word)
                 else:
                     self.console_show_history.append('Undefined')
             else:
