@@ -12,7 +12,6 @@ from PyQt5.QtCore import Qt, QCoreApplication
 from GUI.main import Ui_Dialog
 from Element import Word, Alphabet
 
-
 PATH = './Lib/E_alphabet.csv'
 app = QtWidgets.QApplication(sys.argv)
 
@@ -116,7 +115,6 @@ def terminal_version_old():
 
 
 class MainWin(QtWidgets.QWidget, Ui_Dialog):
-
     MODE = 'SEARCH'
     WORD = None
     CODE = 0
@@ -288,7 +286,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                         self.info_clear()
                         self.label_word_show.setText(self.WORD.word)
                         self.label_info.setText('Definition of [%s] required' % self.WORD.word)
-                elif self.MODE == 'RANDOM':
+                elif self.MODE == 'RANDOM':  # TODO
                     self.WORD = alphabet.get_random()
                     self.info_clear()
                     self.label_word_show.setText(self.WORD.word)
