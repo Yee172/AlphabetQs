@@ -7,8 +7,9 @@ __all__ = ['alphabet', 'terminal_version_old', 'MainWin', 'app', 'sys']
 import os
 import sys
 import pandas as pd
-from PyQt5 import QtGui, QtWidgets
-from PyQt5.QtCore import Qt, QCoreApplication
+from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt5.QtCore import Qt, QCoreApplication, QUrl
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 from GUI.main import Ui_Dialog
 from Element import Word, Alphabet
 
@@ -132,6 +133,12 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.setupUi(self)
         self.initializing()
         self.wordlist_show()
+
+        self.web_viewer = QWebEngineView()
+        self.web_viewer.setObjectName('web_viewer')
+        # self.web_viewer.setGeometry(QtCore.QRect(800, 20, 360, 450))
+        # self.web_viewer.load(QUrl("http://www.baidu.com"))
+
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
         self.button_help.clicked.connect(self.show_help)
         self.button_clear.clicked.connect(self.clear)
