@@ -247,6 +247,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.console_show_history.append(''.ljust(7) + '\t\t      Example: ' + 'mode random')
         self.console_show_history.append('show'.ljust(7) + '\t->\t' + 'Show the word list')
         self.console_show_history.append('hide'.ljust(7) + '\t->\t' + 'Hide the word list')
+        self.console_show_history.append('code'.ljust(7) + '\t->\t' + 'Show more info')
         self.console_show_history.append('quit'.ljust(7) + '\t->\t' + 'Exit the program')
         self.console_show_history.append(''.center(self.LENGTH, '-'))
 
