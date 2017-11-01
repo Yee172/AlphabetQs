@@ -137,7 +137,9 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.web_viewer = QWebEngineView()
         self.web_viewer.setObjectName('web_viewer')
         # self.web_viewer.setGeometry(QtCore.QRect(800, 20, 360, 450))
-        # self.web_viewer.load(QUrl("http://www.baidu.com"))
+        self.web_viewer.load(QUrl("http://www.baidu.com"))
+        # self.web_viewer.setUrl(QUrl("http://www.baidu.com"))
+        # self.web_viewer.show()
 
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
         self.button_help.clicked.connect(self.show_help)
@@ -159,9 +161,11 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     def more_info(self):
         self.MORE = self.check_more.checkState()
         if self.MORE:
-            self.resize(1200, 562)
+            # self.resize(1200, 562)
+            self.web_viewer.show()
         else:
-            self.resize(770, 562)
+            # self.resize(770, 562)
+            pass
 
     def initializing(self):
         self.console_show_history.append('Initial mode is SEARCH MODE!')
