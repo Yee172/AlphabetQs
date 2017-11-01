@@ -10,6 +10,7 @@ import pandas as pd
 from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtCore import Qt, QCoreApplication, QUrl
 from PyQt5.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtWebChannel import QWebChannel
 from GUI.main import Ui_Dialog
 from Element import Word, Alphabet
 
@@ -116,6 +117,7 @@ def terminal_version_old():
 
 
 class MainWin(QtWidgets.QWidget, Ui_Dialog):
+    URL = ''
     MODE = 'SEARCH'
     WORD = None
     CODE = 0
@@ -136,10 +138,8 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
 
         self.web_viewer = QWebEngineView()
         self.web_viewer.setObjectName('web_viewer')
+        # self.channel = QWebChannel(self.web_viewer)
         # self.web_viewer.setGeometry(QtCore.QRect(800, 20, 360, 450))
-        self.web_viewer.load(QUrl("http://www.baidu.com"))
-        # self.web_viewer.setUrl(QUrl("http://www.baidu.com"))
-        # self.web_viewer.show()
 
         self.button_show_wordlist.clicked.connect(self.wordlist_click)
         self.button_help.clicked.connect(self.show_help)
@@ -162,9 +162,14 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.MORE = self.check_more.checkState()
         if self.MORE:
             # self.resize(1200, 562)
-            self.web_viewer.show()
+            if self.WORD is not None:
+                self.URL = 'http://www.youdao.com/w/eng/%s' % self.WORD.word.lower()
+            if self.URL:
+                self.web_viewer.setUrl(QUrl(self.URL))
+                self.web_viewer.show()
         else:
             # self.resize(770, 562)
+            self.web_viewer.close()
             pass
 
     def initializing(self):
