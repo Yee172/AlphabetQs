@@ -107,7 +107,7 @@ def terminal_version_old():
                 word = random_word(content)
                 if word is None:
                     print('Word not available! Rolling back!')
-                    raise
+                    raise()
                 RANDOM_LETTER = content
             except:
                 word = random_word(RANDOM_LETTER)
