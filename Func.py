@@ -119,6 +119,7 @@ def terminal_version_old():
 class MainWin(QtWidgets.QWidget, Ui_Dialog):
     URL = ''
     MODE = 'SEARCH'
+    ASKING = 'WORD'
     WORD = None
     CODE = 0
     MORE = 0
@@ -291,6 +292,10 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     self.console_show_history.append('word list hid')
                 elif content == 'quit':
                     self.close()
+                elif content == 'word':
+                    self.ASKING = 'WORD'
+                elif content in ['def', 'definition']:
+                    self.ASKING = 'DEFINITION'
                 elif self.MODE == 'SEARCH' and ' ' not in content:
                     try:
                         content = int(content)
@@ -301,17 +306,28 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                         self.console_show_history.append('Undefined')
                     else:
                         self.info_clear()
-                        self.label_word_show.setText(self.WORD.word)
-                        self.label_info.setText('Definition of [%s] required' % self.WORD.word)
+                        if self.ASKING == 'WORD':
+                            self.label_def_show.setText(self.WORD.definition)
+                            self.label_info.setText('[Word required]')
+                        if self.ASKING == 'DEFINITION':
+                            self.label_word_show.setText(self.WORD.word)
+                            self.label_info.setText('Definition of [%s] required' % self.WORD.word)
                 elif self.MODE == 'RANDOM':  # TODO
                     self.WORD = alphabet.get_random()
                     self.info_clear()
-                    self.label_word_show.setText(self.WORD.word)
-                    self.label_info.setText('Definition of [%s] required' % self.WORD.word)
+                    if self.ASKING == 'WORD':
+                        self.label_def_show.setText(self.WORD.definition)
+                        self.label_info.setText('[Word required]')
+                    if self.ASKING == 'DEFINITION':
+                        self.label_word_show.setText(self.WORD.word)
+                        self.label_info.setText('Definition of [%s] required' % self.WORD.word)
                 else:
                     self.console_show_history.append('Undefined')
             else:
-                search_q(self.WORD, content)
+                if self.ASKING == 'WORD':
+                    search_w(self.WORD, content)
+                if self.ASKING == 'DEFINITION':
+                    search_q(self.WORD, content)
                 self.WORD = None
                 self.label_info.setText('')
 
@@ -337,6 +353,23 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                                                  '</span></html>')
             self.console_show_history.append('↓\tYour definition\t↓\n%s' % definition)
             self.console_show_history.append('%s\n↑\tReal definition\t↑' % word.definition)
+            self.console_show_history.append(''.center(self.LENGTH, '-'))
+            self.info_show(word)
+
+        def search_w(word, w):
+            self.console_show_history.append(''.center(self.LENGTH, '-'))
+            if str_process(word.word) == str_process(w):
+                self.console_show_history.append('<html><head/>'
+                                                 '<﻿span style=" font-weight:600; color:#ff0000;">'
+                                                 '√'
+                                                 '</span></html>')
+            else:
+                self.console_show_history.append('<html><head/>'
+                                                 '<﻿span style=" font-weight:600; color:#ff0000;">'
+                                                 '×'
+                                                 '</span></html>')
+            self.console_show_history.append('↓\tYour word\t↓\n%s' % w)
+            self.console_show_history.append('%s\n↑\tReal word\t↑' % word.word)
             self.console_show_history.append(''.center(self.LENGTH, '-'))
             self.info_show(word)
 
