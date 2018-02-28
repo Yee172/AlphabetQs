@@ -14,7 +14,7 @@ from PyQt5.QtWebChannel import QWebChannel
 from GUI.main import Ui_Dialog
 from Element import Word, Alphabet
 
-PATH = './Lib/E_alphabet.csv'
+PATH = './Lib/E_alphabet_volume_2.csv'
 app = QtWidgets.QApplication(sys.argv)
 
 
