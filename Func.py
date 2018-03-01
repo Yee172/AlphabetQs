@@ -19,10 +19,12 @@ app = QtWidgets.QApplication(sys.argv)
 
 
 def read_in(csvfile):
-    return pd.read_csv(csvfile).values
+    return pd.read_csv(csvfile)
 
 
-alphabet = Alphabet([Word(x) for x in read_in(PATH)])
+READ_IN = read_in(PATH)
+alphabet = Alphabet([Word(READ_IN.loc[i]) for i in range(len(READ_IN))])
+del READ_IN
 
 
 def find_word(content):
@@ -52,7 +54,7 @@ def random_word(letter='all'):
 
 
 def str_process(string):
-    return string.translate(string.maketrans('', '', ' ,;()[]{}/')).lower()
+    return string.translate(string.maketrans('', '', ' ,.;()[]{}/')).lower()
 
 
 def definition_q(word):

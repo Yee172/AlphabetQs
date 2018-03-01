@@ -15,11 +15,23 @@ class Word:
     total = 0
 
     def __init__(self, line):
-        self.family = line[1][0].upper()
-        self.num = int(line[0])
-        self.word = line[1]
-        self.definition = line[2]
-        self.sample = line[3]
+        self.num = int(line['#'])
+        self.word = line['WORD']
+        self.definition = line['DEFINITION']
+        self.sample = line['SAMPLE SENTENCE']
+        self.family = self.word[0].upper()
+        try:
+            self.word_type = eval(line['WORD TYPE'])
+        except:
+            self.word_type = None
+        try:
+            self.derivatives = eval(line['DERIVATIVES'])
+        except:
+            self.derivatives = None
+        try:
+            self.thesaurus = eval(line['THESAURUS'])
+        except:
+            self.thesaurus = None
         Word.total += 1
 
     def get_sample(self):
