@@ -2,7 +2,7 @@
 # coding: utf-8
 __author__ = 'Yee_172'
 __date__ = '2017/9/26'
-__all__ = ['alphabet', 'terminal_version_old', 'MainWin', 'app', 'sys']
+__all__ = ['ALPHABET', 'terminal_version_old', 'MainWin', 'app', 'sys']
 
 import os
 import sys
@@ -23,7 +23,7 @@ def read_in(csvfile):
 
 
 READ_IN = read_in(PATH)
-alphabet = Alphabet([Word(READ_IN.loc[i]) for i in range(len(READ_IN))])
+ALPHABET = Alphabet([Word(READ_IN.loc[i]) for i in range(len(READ_IN))])
 del READ_IN
 
 
@@ -32,12 +32,12 @@ def find_word(content):
         return None
     try:
         if isinstance(content, int):
-            for each in alphabet.words:
+            for each in ALPHABET.words:
                 if each.num == content:
                     return each
         if isinstance(content, str):
             letter = content[0].upper()
-            for each in alphabet.families[letter].words:
+            for each in ALPHABET.families[letter].words:
                 if each.word.lower() == content.lower():
                     return each
     except:
@@ -50,7 +50,7 @@ def clear_screen():
 
 
 def random_word(letter='all'):
-    return alphabet.get_random(letter)
+    return ALPHABET.get_random(letter)
 
 
 def str_process(string):
@@ -119,6 +119,7 @@ def terminal_version_old():
 
 
 class MainWin(QtWidgets.QWidget, Ui_Dialog):
+    ALPHABET = ALPHABET
     URL = ''
     MODE = 'SEARCH'
     ASKING = 'WORD'
@@ -131,6 +132,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     WORDLIST_NUM = 0
     HISTORY_NUM = 0
     SEARCH_CONTENT = ''
+    RELOAD_CONTENT = '%d-%d' % (ALPHABET.words[0].num, ALPHABET.words[-1].num)
     EMPTY_MODEL = QtGui.QStandardItemModel()
 
     def __init__(self):
@@ -152,6 +154,10 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.check_more.stateChanged.connect(self.more_info)
         self.combo_box_mode.currentIndexChanged.connect(self.mode_update)
         self.search_box.textChanged.connect(self.search)
+        self.button_reload.clicked.connect(self.wordlist_reload)
+        _translate = QCoreApplication.translate
+        self.reload_selection_box.setPlaceholderText(
+            _translate("Dialog", self.RELOAD_CONTENT))
         self.show()
 
     def code_update(self):
@@ -185,24 +191,24 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         try:
             temp = int(content)
             if self.CONTAIN:
-                for each in alphabet.words:
+                for each in self.ALPHABET.words:
                     if content in '%03d' % each.num:
                         result.append(each)
                 return result
             else:
-                for each in alphabet.words:
+                for each in self.ALPHABET.words:
                     if content == ('%03d' % each.num)[:len(content)]:
                         result.append(each)
                 return result
         except:
             content = content.lower()
             if self.CONTAIN:
-                for each in alphabet.words:
+                for each in self.ALPHABET.words:
                     if content in each.word.lower():
                         result.append(each)
                 return result
             else:
-                for each in alphabet.words:
+                for each in self.ALPHABET.words:
                     if content == each.word[:len(content)].lower():
                         result.append(each)
                 return result
@@ -216,6 +222,21 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
             if self.button_show_wordlist.text() == 'HIDE':
                 self.wordlist_show()
 
+    def wordlist_reload(self):
+        _translate = QCoreApplication.translate
+        self.RELOAD_CONTENT = self.reload_selection_box.text()
+        try:
+            left, right = map(int, self.RELOAD_CONTENT.split('-'))
+            left, right = min(left, right), max(left, right)
+            READ_IN = read_in(PATH)
+            self.ALPHABET = Alphabet([Word(READ_IN.loc[i])
+                                      for i in range(len(READ_IN))
+                                      if left <= int(READ_IN.loc[i]['#']) <= right])
+            del READ_IN
+            self.wordlist_show()
+        except:
+            self.reload_selection_box.setText(_translate("Dialog", ''))
+
     def wordlist_click(self):
         content = self.button_show_wordlist.text()
         if content == 'SHOW':
@@ -226,7 +247,9 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         if content == 'HIDE':
             self.wordlist_hide()
 
-    def wordlist_show(self, words=alphabet.words):
+    def wordlist_show(self, words=None):
+        if words is None:
+            words = self.ALPHABET.words
         wordlist_model = QtGui.QStandardItemModel(0, 2, self)
         wordlist_model.setHeaderData(0, Qt.Horizontal, '#')
         wordlist_model.setHeaderData(1, Qt.Horizontal, 'WORD')
@@ -315,7 +338,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                             self.label_word_show.setText(self.WORD.word)
                             self.label_info.setText('Definition of [%s] required' % self.WORD.word)
                 elif self.MODE == 'RANDOM':  # TODO
-                    self.WORD = alphabet.get_random()
+                    self.WORD = self.ALPHABET.get_random()
                     self.info_clear()
                     if self.ASKING == 'WORD':
                         self.label_def_show.setText(self.WORD.definition)
