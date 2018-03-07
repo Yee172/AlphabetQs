@@ -86,7 +86,7 @@ class Ui_Dialog(object):
         self.button_clear.setGeometry(QtCore.QRect(796, 576, 71, 32))
         self.button_clear.setObjectName("button_clear")
         self.label_info = QtWidgets.QLabel(Dialog)
-        self.label_info.setGeometry(QtCore.QRect(429, 605, 321, 20))
+        self.label_info.setGeometry(QtCore.QRect(339, 605, 411, 20))
         self.label_info.setText("")
         self.label_info.setAlignment(QtCore.Qt.AlignCenter)
         self.label_info.setObjectName("label_info")

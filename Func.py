@@ -6,6 +6,7 @@ __all__ = ['ALPHABET', 'terminal_version_old', 'MainWin', 'app', 'sys']
 
 import os
 import sys
+import platform
 import pandas as pd
 from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtCore import Qt, QCoreApplication, QUrl
@@ -16,6 +17,9 @@ from Element import Word, Alphabet
 
 PATH = './Lib/E_alphabet_volume_2.csv'
 app = QtWidgets.QApplication(sys.argv)
+SYSTEM = platform.system()
+IS_OSX = SYSTEM == 'Darwin'
+IS_WINDOWS = SYSTEM == 'Windows'
 
 
 def read_in(csvfile):
@@ -138,6 +142,19 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     def __init__(self):
         super(MainWin, self).__init__()
         self.setupUi(self)
+        if IS_WINDOWS:
+            x, y, width, height = self.button_show_wordlist.geometry().getRect()
+            self.button_show_wordlist.setGeometry(QtCore.QRect(x + 5, y + 4, width - 10, height - 11))
+            x, y, width, height = self.button_quit.geometry().getRect()
+            self.button_quit.setGeometry(QtCore.QRect(x + 6, y + 4, width - 10, height - 11))
+            x, y, width, height = self.button_help.geometry().getRect()
+            self.button_help.setGeometry(QtCore.QRect(x + 6, y + 4, width - 10, height - 11))
+            x, y, width, height = self.button_clear.geometry().getRect()
+            self.button_clear.setGeometry(QtCore.QRect(x + 8, y + 4, width - 14, height - 11))
+            x, y, width, height = self.combo_box_mode.geometry().getRect()
+            self.combo_box_mode.setGeometry(QtCore.QRect(x + 3, y + 4, width - 6, height - 9))
+            x, y, width, height = self.button_reload.geometry().getRect()
+            self.button_reload.setGeometry(QtCore.QRect(x + 8, y + 4, width - 10, height - 9))
         self.initializing()
         self.wordlist_show()
 
