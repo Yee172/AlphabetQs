@@ -1,5 +1,11 @@
-@echo off
-cd\
-%~d0
-cd "%cd%"
 python3 Main.py
+If errorlevel 1
+(
+    python Main.py
+    If errorlevel 1
+    (
+    	echo Could not find Python3
+    )
+)
+Pause
+exit
