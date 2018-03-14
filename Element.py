@@ -37,11 +37,22 @@ class Word:
     def get_sample(self):
         return self.sample.replace('``', '\033[1;31m').replace('`', '\033[0m')
 
+    def html_definition(self):
+        return self.definition.replace('\\n', '<br/>')
+
     def html_sample(self):
         return self.sample\
-            .replace('``', '<html><head/><span style=" color:#ff0000;">')\
+            .replace('``', '<html><span style=" color:#ff0000;">')\
             .replace('`', '</span></html>')\
             .replace('\\n', '<br/>')
+
+    def html_thesaurus(self):
+        if self.thesaurus:
+            html_string = ''
+            for each in self.thesaurus:
+                html_string += '<html><span style=" color:#ff0000;">' + each + '</span></html><br/>'
+                html_string += '<br/>'.join(self.thesaurus[each]) + '<br/>'
+            return html_string
 
 
 class Family:

@@ -58,7 +58,7 @@ def random_word(letter='all'):
 
 
 def str_process(string):
-    return string.translate(string.maketrans('', '', ' ,.;()[]{}/')).lower()
+    return string.translate(string.maketrans('', '', ' ,.;()[]{}/\n')).lower()
 
 
 def definition_q(word):
@@ -349,7 +349,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     else:
                         self.info_clear()
                         if self.ASKING == 'WORD':
-                            self.label_def_show.setText(self.WORD.definition)
+                            self.label_def_show.setText(self.WORD.html_definition())
                             self.label_info.setText('[Word required]')
                         if self.ASKING == 'DEFINITION':
                             self.label_word_show.setText(self.WORD.word)
@@ -358,7 +358,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     self.WORD = self.ALPHABET.get_random()
                     self.info_clear()
                     if self.ASKING == 'WORD':
-                        self.label_def_show.setText(self.WORD.definition)
+                        self.label_def_show.setText(self.WORD.html_definition())
                         self.label_info.setText('[Word required]')
                     if self.ASKING == 'DEFINITION':
                         self.label_word_show.setText(self.WORD.word)
@@ -384,13 +384,13 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         def search_q(word, definition):
             self.console_show_history.append(''.center(self.LENGTH, '-'))
             if str_process(word.definition) == str_process(definition):
-                self.console_show_history.append('<html><head/>'
-                                                 '<﻿span style=" font-weight:600; color:#ff0000;">'
+                self.console_show_history.append('<html>'
+                                                 '<span style=" font-weight:600; color:#ff0000;">'
                                                  '√'
                                                  '</span></html>')
             else:
-                self.console_show_history.append('<html><head/>'
-                                                 '<﻿span style=" font-weight:600; color:#ff0000;">'
+                self.console_show_history.append('<html>'
+                                                 '<span style=" font-weight:600; color:#ff0000;">'
                                                  '×'
                                                  '</span></html>')
             self.console_show_history.append('↓\tYour definition\t↓\n%s' % definition)
@@ -401,13 +401,13 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         def search_w(word, w):
             self.console_show_history.append(''.center(self.LENGTH, '-'))
             if str_process(word.word) == str_process(w):
-                self.console_show_history.append('<html><head/>'
-                                                 '<﻿span style=" font-weight:600; color:#ff0000;">'
+                self.console_show_history.append('<html>'
+                                                 '<span style=" font-weight:600; color:#ff0000;">'
                                                  '√'
                                                  '</span></html>')
             else:
-                self.console_show_history.append('<html><head/>'
-                                                 '<﻿span style=" font-weight:600; color:#ff0000;">'
+                self.console_show_history.append('<html>'
+                                                 '<span style=" font-weight:600; color:#ff0000;">'
                                                  '×'
                                                  '</span></html>')
             self.console_show_history.append('↓\tYour word\t↓\n%s' % w)
@@ -428,10 +428,12 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
 
     def info_show(self, word):
         self.label_word_show.setText(word.word)
-        self.label_def_show.setText(word.definition)
+        self.label_def_show.setText(word.html_definition())
         self.label_samp_show.setText(word.html_sample())
+        self.label_thesaurus_show.setText(word.html_thesaurus())
 
     def info_clear(self):
         self.label_word_show.setText('')
         self.label_def_show.setText('')
         self.label_samp_show.setText('')
+        self.label_thesaurus_show.setText('')
