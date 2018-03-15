@@ -377,7 +377,6 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
             if mode:
                 self.MODE = mode
                 self.combo_box_mode.setCurrentIndex({'SEARCH': 0, 'RANDOM': 1}[mode])
-                self.console_show_history.append('MODE changed into %s' % self.MODE)
             else:
                 self.console_show_history.append('MODE now is %s' % self.MODE)
 
