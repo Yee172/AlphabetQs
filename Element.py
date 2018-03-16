@@ -2,10 +2,13 @@
 # coding: utf-8
 __author__ = 'Yee_172'
 __date__ = '2017/9/27'
-__all__ = ['Word', 'Family', 'Alphabet']
+__all__ = ['Word', 'Family', 'Alphabet', 'THESAURUS_POOL']
 
 
 import random
+
+
+THESAURUS_POOL = set()
 
 
 class Word:
@@ -30,6 +33,8 @@ class Word:
             self.derivatives = None
         try:
             self.thesaurus = eval(line['THESAURUS'])
+            for each in self.thesaurus:
+                THESAURUS_POOL.update(self.thesaurus[each])
         except:
             self.thesaurus = None
         Word.total += 1
