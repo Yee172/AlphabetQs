@@ -6,6 +6,7 @@ __all__ = ['Word', 'Family', 'Alphabet', 'THESAURUS_POOL']
 
 
 import random
+from functools import reduce
 
 
 THESAURUS_POOL = set()
@@ -52,12 +53,21 @@ class Word:
             .replace('\\n', '<br/>')
 
     def html_thesaurus(self):
+        html_string = ''
         if self.thesaurus:
-            html_string = ''
             for each in self.thesaurus:
                 html_string += '<html><span style=" color:#ff0000;">' + each + '</span></html><br/>'
                 html_string += '<br/>'.join(self.thesaurus[each]) + '<br/>'
-            return html_string
+        return html_string
+
+    def get_random_html_thesaurus(self):
+        html_string = ''
+        if self.thesaurus:
+            pool = reduce(lambda x, y: x + y, self.thesaurus.values())
+            html_string += random.sample(pool, 1)[0]
+        else:
+            html_string += 'thesaurus NOT available'
+        return html_string
 
 
 class Family:

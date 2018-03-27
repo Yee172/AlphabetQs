@@ -338,6 +338,8 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     self.ASKING = 'WORD'
                 elif content in ['def', 'definition']:
                     self.ASKING = 'DEFINITION'
+                elif content in ['thes', 'thesaurus']:
+                    self.ASKING = 'THESAURUS'
                 elif self.MODE == 'SEARCH' and ' ' not in content:
                     try:
                         content = int(content)
@@ -354,6 +356,13 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                         if self.ASKING == 'DEFINITION':
                             self.label_word_show.setText(self.WORD.word)
                             self.label_info.setText('Definition of [%s] required' % self.WORD.word)
+                        if self.ASKING == 'THESAURUS':
+                            thesaurus = self.WORD.get_random_html_thesaurus()
+                            self.label_thesaurus_show.setText(thesaurus)
+                            if thesaurus == 'thesaurus NOT available':
+                                self.label_info.setText('[Word required]')
+                            else:
+                                self.label_info.setText('[Word has the same meaning of [%s] required]' % thesaurus)
                 elif self.MODE == 'RANDOM':  # TODO
                     self.WORD = self.ALPHABET.get_random()
                     self.info_clear()
@@ -363,6 +372,13 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     if self.ASKING == 'DEFINITION':
                         self.label_word_show.setText(self.WORD.word)
                         self.label_info.setText('Definition of [%s] required' % self.WORD.word)
+                    if self.ASKING == 'THESAURUS':
+                        thesaurus = self.WORD.get_random_html_thesaurus()
+                        self.label_thesaurus_show.setText(thesaurus)
+                        if thesaurus == 'thesaurus NOT available':
+                            self.label_info.setText('[Word required]')
+                        else:
+                            self.label_info.setText('[Word has the same meaning of [%s] required]' % thesaurus)
                 else:
                     self.console_show_history.append('Undefined')
             else:
@@ -370,6 +386,8 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     search_w(self.WORD, content)
                 if self.ASKING == 'DEFINITION':
                     search_q(self.WORD, content)
+                if self.ASKING == 'THESAURUS':
+                    search_w(self.WORD, content)
                 self.WORD = None
                 self.label_info.setText('')
 
