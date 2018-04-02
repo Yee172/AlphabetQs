@@ -5,6 +5,7 @@ __date__ = '2017/9/27'
 __all__ = ['Word', 'Family', 'Alphabet', 'THESAURUS_POOL']
 
 
+import re
 import random
 from functools import reduce
 
@@ -51,6 +52,13 @@ class Word:
             .replace('``', '<html><span style=" color:#ff0000;">')\
             .replace('`', '</span></html>')\
             .replace('\\n', '<br/>')
+
+    def html_sample_hollow(self):
+        return re.sub(r'``.*`',
+                      '<html><span style=" color:#ff0000;">'
+                      '__?__'
+                      '</span></html>',
+                      self.sample).replace('\\n', '<br/>')
 
     def html_thesaurus(self):
         html_string = ''
