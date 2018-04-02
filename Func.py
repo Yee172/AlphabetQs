@@ -326,6 +326,8 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                         mode_change('SEARCH')
                     elif mode in ['r', 'rand', 'random']:
                         mode_change('RANDOM')
+                    elif mode in ['o', 'ord', 'order']:
+                        mode_change('ORDER')
                 elif content == 'show':
                     self.wordlist_show()
                     self.console_show_history.append('Word list showed')
@@ -342,7 +344,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     self.ASKING = 'SAMPLE'
                 elif content in ['thes', 'thesaurus']:
                     self.ASKING = 'THESAURUS'
-                elif self.MODE == 'SEARCH' and ' ' not in content:
+                elif self.MODE == 'SEARCH':
                     try:
                         content = int(content)
                     except:
@@ -351,42 +353,13 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     if self.WORD is None:
                         self.console_show_history.append('Undefined')
                     else:
-                        self.info_clear()
-                        if self.ASKING == 'WORD':
-                            self.label_def_show.setText(self.WORD.html_definition())
-                            self.label_info.setText('[Word required]')
-                        if self.ASKING == 'DEFINITION':
-                            self.label_word_show.setText(self.WORD.word)
-                            self.label_info.setText('Definition of [%s] required' % self.WORD.word)
-                        if self.ASKING == 'SAMPLE':
-                            self.label_samp_show.setText(self.WORD.html_sample_hollow())
-                            self.label_info.setText('[Word required]')
-                        if self.ASKING == 'THESAURUS':
-                            thesaurus = self.WORD.get_random_html_thesaurus()
-                            self.label_thesaurus_show.setText(thesaurus)
-                            if thesaurus == 'thesaurus NOT available':
-                                self.label_info.setText('[Word required]')
-                            else:
-                                self.label_info.setText('[Word has the same meaning of [%s] required]' % thesaurus)
+                        asking()
                 elif self.MODE == 'RANDOM':  # TODO
                     self.WORD = self.ALPHABET.get_random()
-                    self.info_clear()
-                    if self.ASKING == 'WORD':
-                        self.label_def_show.setText(self.WORD.html_definition())
-                        self.label_info.setText('[Word required]')
-                    if self.ASKING == 'DEFINITION':
-                        self.label_word_show.setText(self.WORD.word)
-                        self.label_info.setText('Definition of [%s] required' % self.WORD.word)
-                    if self.ASKING == 'SAMPLE':
-                        self.label_samp_show.setText(self.WORD.html_sample_hollow())
-                        self.label_info.setText('[Word required]')
-                    if self.ASKING == 'THESAURUS':
-                        thesaurus = self.WORD.get_random_html_thesaurus()
-                        self.label_thesaurus_show.setText(thesaurus)
-                        if thesaurus == 'thesaurus NOT available':
-                            self.label_info.setText('[Word required]')
-                        else:
-                            self.label_info.setText('[Word has the same meaning of [%s] required]' % thesaurus)
+                    asking()
+                elif self.MODE == 'ORDER':
+                    self.WORD = self.ALPHABET.get_next()
+                    asking()
                 else:
                     self.console_show_history.append('Undefined')
             else:
@@ -397,10 +370,29 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                 self.WORD = None
                 self.label_info.setText('')
 
+        def asking():
+            self.info_clear()
+            if self.ASKING == 'WORD':
+                self.label_def_show.setText(self.WORD.html_definition())
+                self.label_info.setText('[Word required]')
+            if self.ASKING == 'DEFINITION':
+                self.label_word_show.setText(self.WORD.word)
+                self.label_info.setText('Definition of [%s] required' % self.WORD.word)
+            if self.ASKING == 'SAMPLE':
+                self.label_samp_show.setText(self.WORD.html_sample_hollow())
+                self.label_info.setText('[Word required]')
+            if self.ASKING == 'THESAURUS':
+                thesaurus = self.WORD.get_random_html_thesaurus()
+                self.label_thesaurus_show.setText(thesaurus)
+                if thesaurus == 'thesaurus NOT available':
+                    self.label_info.setText('[Word required]')
+                else:
+                    self.label_info.setText('[Word has the same meaning of [%s] required]' % thesaurus)
+
         def mode_change(mode=''):
             if mode:
                 self.MODE = mode
-                self.combo_box_mode.setCurrentIndex({'SEARCH': 0, 'RANDOM': 1}[mode])
+                self.combo_box_mode.setCurrentIndex({'SEARCH': 0, 'RANDOM': 1, 'ORDER': 2}[mode])
             else:
                 self.console_show_history.append('MODE now is %s' % self.MODE)
 

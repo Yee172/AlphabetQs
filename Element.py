@@ -17,8 +17,6 @@ class Word:
     """
     A class of word
     """
-    total = 0
-
     def __init__(self, line):
         self.num = int(line['#'])
         self.word = line['WORD']
@@ -39,7 +37,6 @@ class Word:
                 THESAURUS_POOL.update(self.thesaurus[each])
         except:
             self.thesaurus = None
-        Word.total += 1
 
     def get_sample(self):
         return self.sample.replace('``', '\033[1;31m').replace('`', '\033[0m')
@@ -92,12 +89,14 @@ class Alphabet:
     A class of Alphabet
     """
     def __init__(self, words):
-        self.total = Word.total
         self.words = words
+        self.total = len(self.words)
+        self.index = self.total - 1
         families = set(each.family for each in self.words)
         self.families = {}
         for each in families:
             self.families[each] = Family(each, words)
+        print(self.total)
 
     def get_random(self, letter='all'):
         if letter.lower() in ['all', 'each', 'every']:
@@ -108,3 +107,7 @@ class Alphabet:
             if len(words) > 0:
                 return words[random.randint(0, len(words) - 1)]
         return None
+
+    def get_next(self, step=1):
+        self.index = (self.index + step) % self.total
+        return self.words[self.index]
