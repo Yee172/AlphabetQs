@@ -151,6 +151,8 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
             self.button_help.setGeometry(QtCore.QRect(x + 6, y + 4, width - 10, height - 11))
             x, y, width, height = self.button_clear.geometry().getRect()
             self.button_clear.setGeometry(QtCore.QRect(x + 8, y + 4, width - 14, height - 11))
+            x, y, width, height = self.combo_box_asking.geometry().getRect()
+            self.combo_box_asking.setGeometry(QtCore.QRect(x + 3, y + 4, width - 6, height - 9))
             x, y, width, height = self.combo_box_mode.geometry().getRect()
             self.combo_box_mode.setGeometry(QtCore.QRect(x + 3, y + 4, width - 6, height - 9))
             x, y, width, height = self.button_reload.geometry().getRect()
@@ -169,6 +171,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
         self.console.returnPressed.connect(self.console_operate)
         self.check_code.stateChanged.connect(self.code_update)
         self.check_more.stateChanged.connect(self.more_info)
+        self.combo_box_asking.currentIndexChanged.connect(self.asking_update)
         self.combo_box_mode.currentIndexChanged.connect(self.mode_update)
         self.search_box.textChanged.connect(self.search)
         self.button_reload.clicked.connect(self.wordlist_reload)
@@ -183,6 +186,10 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
     def mode_update(self):
         self.MODE = self.combo_box_mode.currentText()
         self.console_show_history.append('MODE changed into %s' % self.MODE)
+
+    def asking_update(self):
+        self.ASKING = self.combo_box_asking.currentText()
+        self.console_show_history.append('ASKING changed into %s' % self.ASKING)
 
     def more_info(self):
         self.MORE = self.check_more.checkState()
@@ -336,14 +343,18 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     self.console_show_history.append('word list hid')
                 elif content == 'quit':
                     self.close()
-                elif content == 'word':
-                    self.ASKING = 'WORD'
-                elif content in ['def', 'definition']:
-                    self.ASKING = 'DEFINITION'
-                elif content in ['sam', 'sample']:
-                    self.ASKING = 'SAMPLE'
-                elif content in ['thes', 'thesaurus']:
-                    self.ASKING = 'THESAURUS'
+                elif content[:6] == 'asking':
+                    asking = str_process(content[6:])
+                    if not asking:
+                        asking_change()
+                    elif asking == 'word':
+                        asking_change('WORD')
+                    elif asking in ['def', 'definition']:
+                        asking_change('DEFINITION')
+                    elif asking in ['sam', 'sample']:
+                        asking_change('SAMPLE')
+                    elif asking in ['thes', 'thesaurus']:
+                        asking_change('THESAURUS')
                 elif self.MODE == 'SEARCH':
                     try:
                         content = int(content)
@@ -353,13 +364,13 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                     if self.WORD is None:
                         self.console_show_history.append('Undefined')
                     else:
-                        asking()
+                        ask()
                 elif self.MODE == 'RANDOM':  # TODO
                     self.WORD = self.ALPHABET.get_random()
-                    asking()
+                    ask()
                 elif self.MODE == 'ORDER':
                     self.WORD = self.ALPHABET.get_next()
-                    asking()
+                    ask()
                 else:
                     self.console_show_history.append('Undefined')
             else:
@@ -370,7 +381,7 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                 self.WORD = None
                 self.label_info.setText('')
 
-        def asking():
+        def ask():
             self.info_clear()
             if self.ASKING == 'WORD':
                 self.label_def_show.setText(self.WORD.html_definition())
@@ -389,10 +400,24 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                 else:
                     self.label_info.setText('[Word has the same meaning of [%s] required]' % thesaurus)
 
+        def asking_change(asking=''):
+            if asking:
+                self.ASKING = asking
+                self.combo_box_asking.setCurrentIndex({'WORD': 0,
+                                                       'DEFINITION': 1,
+                                                       'SAMPLE': 2,
+                                                       'THESAURUS': 3}
+                                                      [asking])
+            else:
+                self.console_show_history.append('ASKING now is %s' % self.ASKING)
+
         def mode_change(mode=''):
             if mode:
                 self.MODE = mode
-                self.combo_box_mode.setCurrentIndex({'SEARCH': 0, 'RANDOM': 1, 'ORDER': 2}[mode])
+                self.combo_box_mode.setCurrentIndex({'SEARCH': 0,
+                                                     'RANDOM': 1,
+                                                     'ORDER': 2}
+                                                    [mode])
             else:
                 self.console_show_history.append('MODE now is %s' % self.MODE)
 

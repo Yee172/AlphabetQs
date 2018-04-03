@@ -96,7 +96,6 @@ class Alphabet:
         self.families = {}
         for each in families:
             self.families[each] = Family(each, words)
-        print(self.total)
 
     def get_random(self, letter='all'):
         if letter.lower() in ['all', 'each', 'every']:

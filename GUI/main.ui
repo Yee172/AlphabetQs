@@ -538,6 +538,47 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QComboBox" name="combo_box_asking">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>306</y>
+     <width>121</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Menlo</family>
+    </font>
+   </property>
+   <property name="currentText">
+    <string>WORD</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <item>
+    <property name="text">
+     <string>WORD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>DEFINITION</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>SAMPLE</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>THESAURUS</string>
+    </property>
+   </item>
+  </widget>
   <action name="actionread_in">
    <property name="checkable">
     <bool>false</bool>
