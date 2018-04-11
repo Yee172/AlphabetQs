@@ -51,7 +51,7 @@ class Word:
             .replace('\\n', '<br/>')
 
     def html_sample_hollow(self):
-        return re.sub(r'``.*`',
+        return re.sub(r'``\w*`',
                       '<html><span style=" color:#ff0000;">'
                       '__?__'
                       '</span></html>',
@@ -65,7 +65,7 @@ class Word:
                 html_string += '<br/>'.join(self.thesaurus[each]) + '<br/>'
         return html_string
 
-    def get_random_html_thesaurus(self):
+    def get_random_html_thesaurus(self):  # TODO Trie Tree
         html_string = ''
         if self.thesaurus:
             pool = reduce(lambda x, y: x + y, self.thesaurus.values())
