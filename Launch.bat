@@ -1,7 +1,7 @@
-python3 Main.py
+python Main.py
 If errorlevel 1
 (
-    python Main.py
+    python3 Main.py
     If errorlevel 1
     (
     	echo Could not find Python3
