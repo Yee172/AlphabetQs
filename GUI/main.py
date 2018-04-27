@@ -76,7 +76,7 @@ class Ui_Dialog(object):
         self.label_samp.setAlignment(QtCore.Qt.AlignCenter)
         self.label_samp.setObjectName("label_samp")
         self.label_samp_show = QtWidgets.QLabel(Dialog)
-        self.label_samp_show.setGeometry(QtCore.QRect(230, 240, 441, 51))
+        self.label_samp_show.setGeometry(QtCore.QRect(230, 240, 441, 61))
         font = QtGui.QFont()
         font.setFamily("Menlo")
         self.label_samp_show.setFont(font)

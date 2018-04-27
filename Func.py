@@ -433,8 +433,8 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                                                  '<span style=" font-weight:600; color:#ff0000;">'
                                                  '×'
                                                  '</span></html>')
-            self.console_show_history.append('↓\tYour definition\t↓\n%s' % definition)
-            self.console_show_history.append('%s\n↑\tReal definition\t↑' % word.definition)
+            self.console_show_history.append('↓        Your definition        ↓\n%s' % definition)
+            self.console_show_history.append('%s\n↑        Real definition        ↑' % word.definition)
             self.console_show_history.append(''.center(self.LENGTH, '-'))
             self.info_show(word)
 
@@ -450,8 +450,8 @@ class MainWin(QtWidgets.QWidget, Ui_Dialog):
                                                  '<span style=" font-weight:600; color:#ff0000;">'
                                                  '×'
                                                  '</span></html>')
-            self.console_show_history.append('↓\tYour word\t↓\n%s' % w)
-            self.console_show_history.append('%s\n↑\tReal word\t↑' % word.word)
+            self.console_show_history.append('↓        Your word        ↓\n%s' % w)
+            self.console_show_history.append('%s\n↑        Real word        ↑' % word.word)
             self.console_show_history.append(''.center(self.LENGTH, '-'))
             self.info_show(word)
 
